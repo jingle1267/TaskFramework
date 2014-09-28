@@ -19,11 +19,17 @@ package com.worthed.framework.basic;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
+
+import com.worthed.framework.Requestable;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskService extends Service {
+
+    private final boolean DEBUG = true;
+    private final String TAG = getClass().getSimpleName();
 
     public static final String FLAG_TASK_CLEAR = "clear_task_tag";
 
@@ -34,6 +40,9 @@ public class TaskService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (DEBUG) {
+            Log.d(TAG, "onStartCommand()");
+        }
         if (intent == null) {
             return START_STICKY;
         }
@@ -41,10 +50,23 @@ public class TaskService extends Service {
             clearTasks();
             return START_STICKY;
         }
-        if (intent.getExtras() == null) {
-            return START_STICKY;
+        // if (intent.getExtras() == null) {
+        //    return START_STICKY;
+        // }
+        if (intent.hasExtra(Requestable.FLAG_REQUST)) {
+            Requestable request = intent.getParcelableExtra(Requestable.FLAG_REQUST);
+            if (request != null) {
+                Controller.instance(this).control(request);
+            } else {
+                if (DEBUG) {
+                    Log.d(TAG, "request == null");
+                }
+            }
+        } else {
+            if (DEBUG) {
+                Log.d(TAG, "do not have Requestable.FLAG_REQUEST");
+            }
         }
-        Controller.instance(this).control(intent.getExtras());
         return START_STICKY;
     }
 

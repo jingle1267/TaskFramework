@@ -37,7 +37,7 @@ public class TaskManagable {
         consumers = new ConcurrentHashMap<Taskable, List<Consumable>>();
     }
 
-    protected boolean regist(Taskable task, Consumable consumer) {
+    public boolean regist(Taskable task, Consumable consumer) {
         if (!consumers.containsKey(task)) {
             consumers.put(task, new Vector<Consumable>());
         }
@@ -48,7 +48,7 @@ public class TaskManagable {
         return true;
     }
 
-    protected boolean unregist(Taskable task, Consumable consumer) {
+    public boolean unregist(Taskable task, Consumable consumer) {
         if (!consumers.containsKey(task)) {
             return false;
         }
@@ -61,7 +61,7 @@ public class TaskManagable {
         return true;
     }
 
-    protected void consume(Responsable response) {
+    public void consume(Responsable response) {
         List<Consumable> consumables = consumers.get(response.task);
         if (consumables == null || consumables.size() < 1) {
             return;
@@ -75,7 +75,7 @@ public class TaskManagable {
         }
     }
 
-    protected void removeConsumer(Consumable consumer) {
+    public void removeConsumer(Consumable consumer) {
         Iterator<Taskable> it = consumers.keySet().iterator();
         Taskable task;
         List<Consumable> consumables;
@@ -95,7 +95,7 @@ public class TaskManagable {
         }
     }
 
-    protected void clearConsumer() {
+    public void clearConsumer() {
         if (consumers == null) {
             return;
         }

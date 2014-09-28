@@ -19,6 +19,7 @@ package com.worthed.framework;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.worthed.framework.basic.TaskService;
 
@@ -26,6 +27,9 @@ import com.worthed.framework.basic.TaskService;
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskServiceManager {
+
+    private static final boolean DEBUG = true;
+    private static final String TAG = "TaskServiceManager";
 
     /**
      * 启动服务
@@ -51,15 +55,22 @@ public class TaskServiceManager {
      * 发送任务
      */
     public static void send(Context context, Taskable task, Requestable request) {
+        if (DEBUG) {
+            Log.d(TAG, "send()");
+        }
         if (task == null || request == null) {
+            if (DEBUG) {
+                Log.e(TAG, "send()  task == null || request == null");
+            }
             return;
         }
         Intent intent = new Intent(context, TaskService.class);
-        Bundle bundle = new Bundle();
+        // Bundle bundle = new Bundle();
         // bundle.putParcelable(Taskable.FLAG_TASK, task);
         request.task = task;
-        bundle.putParcelable(Requestable.FLAG_REQUST, request);
-        intent.putExtras(bundle);
+        // bundle.putParcelable(Requestable.FLAG_REQUST, request);
+        // intent.putExtras(bundle);
+        intent.putExtra(Requestable.FLAG_REQUST, request);
         context.startService(intent);
     }
 

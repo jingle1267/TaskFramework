@@ -49,7 +49,7 @@ public class Taskable implements Parcelable {
     /**
      * 标识任务是否同步
      */
-    protected boolean syncTask = false;
+    protected boolean syncTask = true;
     /**
      * 标识任务是否是复合任务
      */
