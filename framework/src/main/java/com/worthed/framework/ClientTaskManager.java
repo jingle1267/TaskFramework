@@ -21,7 +21,7 @@ import com.worthed.framework.basic.TaskManagable;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class ClientTaskManager{
+public class ClientTaskManager {
 
     public static TaskManagable instance() {
         return new Singleton<TaskManagable>() {

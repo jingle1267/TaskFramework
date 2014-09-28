@@ -25,20 +25,19 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TaskThreadPoolSettings {
 
+    private static TaskThreadPoolSettings instance;
     private final String TAG = getClass().getSimpleName();
-
     public int corePoolSize = 5;
     public int maxPoolSize = 10;
     public long keepAliveTime = 20 * 1000;
     public LinkedBlockingQueue<Runnable> workQueue;
     public ThreadFactory threadFactory;
 
-    private static TaskThreadPoolSettings instance;
-
     private TaskThreadPoolSettings() {
         this.workQueue = new LinkedBlockingQueue<Runnable>(100);
         this.threadFactory = new ThreadFactory() {
             private AtomicInteger count = new AtomicInteger(1);
+
             @Override
             public Thread newThread(Runnable runnable) {
                 Thread thread = new Thread(runnable, TAG + " : " + count.getAndIncrement());

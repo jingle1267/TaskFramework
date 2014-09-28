@@ -28,7 +28,7 @@ public abstract class Requestable implements Parcelable {
 
     public Taskable task;
 
-    public Requestable () {
+    public Requestable() {
 
     }
 
@@ -43,6 +43,7 @@ public abstract class Requestable implements Parcelable {
 
     /**
      * 获得任务执行器
+     *
      * @return
      */
     public Executable getExecutable() {

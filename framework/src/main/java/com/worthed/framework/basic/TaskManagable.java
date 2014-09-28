@@ -18,7 +18,6 @@ package com.worthed.framework.basic;
 
 import com.worthed.framework.Consumable;
 import com.worthed.framework.Responsable;
-import com.worthed.framework.Singleton;
 import com.worthed.framework.Taskable;
 
 import java.util.ArrayList;
@@ -103,7 +102,7 @@ public class TaskManagable {
         Iterator<Taskable> it = consumers.keySet().iterator();
         Taskable task;
         List<Consumable> consumables;
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             task = it.next();
             consumables = consumers.get(task);
             if (consumables == null || consumables.isEmpty()) {

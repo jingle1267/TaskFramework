@@ -24,7 +24,17 @@ import android.os.Parcelable;
  */
 public class Responsable implements Parcelable {
     public static final String FLAG_RESPONSE = "response_tag";
+    public static final Creator<Responsable> CREATOR = new Creator<Responsable>() {
+        @Override
+        public Responsable createFromParcel(Parcel parcel) {
+            return new Responsable(parcel);
+        }
 
+        @Override
+        public Responsable[] newArray(int i) {
+            return new Responsable[i];
+        }
+    };
     public Taskable task;
     public String errorCode, errorMsg;
 
@@ -49,17 +59,5 @@ public class Responsable implements Parcelable {
     public int describeContents() {
         return 0;
     }
-
-    public static final Creator<Responsable> CREATOR = new Creator<Responsable>() {
-        @Override
-        public Responsable createFromParcel(Parcel parcel) {
-            return new Responsable(parcel);
-        }
-
-        @Override
-        public Responsable[] newArray(int i) {
-            return new Responsable[i];
-        }
-    };
 
 }

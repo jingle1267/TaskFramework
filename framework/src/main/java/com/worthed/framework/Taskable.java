@@ -27,11 +27,21 @@ public class Taskable implements Parcelable {
 
     // public final static String FLAG_TASK = "task_tag";
 
+    public static final Creator<Taskable> CREATOR = new Creator<Taskable>() {
+        @Override
+        public Taskable createFromParcel(Parcel parcel) {
+            return new Taskable(parcel);
+        }
+
+        @Override
+        public Taskable[] newArray(int i) {
+            return new Taskable[i];
+        }
+    };
     /**
      * 标识任务的类型
      */
     protected String flag;
-
     /**
      * 是否是单任务,如果是,在任务控制器里会判断该任务是否在任务队列里存在 如果存在则不执行
      */
@@ -88,7 +98,8 @@ public class Taskable implements Parcelable {
             if (!TextUtils.isEmpty(task.flag) && !TextUtils.isEmpty(flag)
                     && task.flag.equals(flag)) {
                 return true;
-            } if (TextUtils.isEmpty(task.flag) && TextUtils.isEmpty(flag)) {
+            }
+            if (TextUtils.isEmpty(task.flag) && TextUtils.isEmpty(flag)) {
                 return true;
             } else {
                 return false;
@@ -97,18 +108,6 @@ public class Taskable implements Parcelable {
             return false;
         }
     }
-
-    public static final Creator<Taskable> CREATOR = new Creator<Taskable>() {
-        @Override
-        public Taskable createFromParcel(Parcel parcel) {
-            return new Taskable(parcel);
-        }
-
-        @Override
-        public Taskable[] newArray(int i) {
-            return new Taskable[i];
-        }
-    };
 
     public boolean isSingleTask() {
         return singleTask;
