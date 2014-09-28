@@ -17,26 +17,50 @@
 package com.worthed.framework;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import com.worthed.framework.basic.TaskService;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskServiceManager {
 
+    /**
+     * 启动服务
+     * @param context
+     */
     public static void start(Context context) {
-
+        Intent intent = new Intent(context, TaskService.class);
+        context.startService(intent);
     }
 
+    /**
+     * 关闭服务
+     * @param context
+     */
     public static void stop(Context context) {
-
+        Intent intent = new Intent(context, TaskService.class);
+        context.stopService(intent);
     }
 
-    public static void send() {
-
+    /**
+     * 发送任务
+     */
+    public static void send(Context context, Taskable task, Requestable request) {
+        Intent intent = new Intent(context, TaskService.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Taskable.FLAG_TASK, task);
+        bundle.putParcelable(Requestable.FLAG_REQUST, request);
+        intent.putExtras(bundle);
+        context.startService(intent);
     }
 
     public static void clearTaskable(Context context) {
-
+        Intent intent = new Intent(context, TaskService.class);
+        intent.putExtra(TaskService.FLAG_TASK_CLEAR, true);
+        context.startService(intent);
     }
 
 }

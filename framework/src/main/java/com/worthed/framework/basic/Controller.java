@@ -20,17 +20,21 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.worthed.framework.Responsable;
+import com.worthed.framework.ServiceTaskManager;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class Controller implements Callbackable {
+public class Controller implements Callbackable, Statable {
 
     private static Context context;
     private static Controller instance;
 
-    private Controller(Context context) {
+    private ThreadManager threadManager;
 
+    private Controller(Context context) {
+        Controller.context = context;
+        threadManager = new ThreadManager(context, this, this);
     }
 
     public static Controller instance(Context context) {
@@ -46,8 +50,27 @@ public class Controller implements Callbackable {
 
     }
 
+    public void clearTask() {
+        ServiceTaskManager.instance().consumers.clear();
+    }
+
     @Override
     public void callback(Responsable response) {
+
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void end() {
+
+    }
+
+    @Override
+    public void clear() {
 
     }
 }

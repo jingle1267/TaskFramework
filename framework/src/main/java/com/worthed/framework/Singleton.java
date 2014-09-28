@@ -17,9 +17,21 @@
 package com.worthed.framework;
 
 /**
+ * Singleton helper class for lazily initialization.
+ *
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Responsable {
-    public Taskable task;
+public abstract class Singleton<T> {
+    private T mInstance;
 
+    protected abstract T create();
+
+    public final T get() {
+        synchronized (this) {
+            if (mInstance == null) {
+                mInstance = create();
+            }
+            return mInstance;
+        }
+    }
 }

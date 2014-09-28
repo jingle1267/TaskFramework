@@ -16,8 +16,24 @@
 
 package com.worthed.framework;
 
+import android.os.Parcelable;
+
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Requestable {
+public abstract class Requestable implements Parcelable {
+
+    public static final String FLAG_REQUST = "request_tag";
+
+    /**
+     * 获得任务执行器
+     * @return
+     */
+    public Executable getExecutable() {
+        return instanceExecutable();
+    }
+
+    protected abstract Executable instanceExecutable();
+
+
 }

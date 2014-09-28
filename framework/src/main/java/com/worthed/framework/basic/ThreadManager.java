@@ -24,14 +24,14 @@ import com.worthed.framework.Executable;
  * 管理任务线程
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class TaskManager {
+public class ThreadManager {
 
     private Context context;
     private Callbackable callbackable;
     private Statable statable;
     private TaskThreadPoolExecutor taskThreadPoolExecutor;
 
-    public TaskManager(Context context, Callbackable callbackable, Statable statable) {
+    public ThreadManager(Context context, Callbackable callbackable, Statable statable) {
         this.context = context;
         this.callbackable = callbackable;
         this.statable = statable;

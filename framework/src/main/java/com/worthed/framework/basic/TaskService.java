@@ -25,6 +25,8 @@ import android.os.IBinder;
  */
 public class TaskService extends Service {
 
+    public static final String FLAG_TASK_CLEAR = "clear_task_tag";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,7 +34,18 @@ public class TaskService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        return super.onStartCommand(intent, flags, startId);
+        if (intent == null) {
+            return START_STICKY;
+        }
+        if (intent.getBooleanExtra(FLAG_TASK_CLEAR, false)) {
+            clearTasks();
+            return START_STICKY;
+        }
+        if (intent.getExtras() != null) {
+            return START_STICKY;
+        }
+        Controller.instance(this).control(intent.getExtras());
+        return START_STICKY;
     }
 
     @Override
@@ -48,5 +61,9 @@ public class TaskService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    public void clearTasks() {
+        Controller.instance(this).clearTask();
     }
 }
