@@ -21,16 +21,15 @@ import com.worthed.framework.basic.TaskManagable;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class ClientTaskManager {
+public class ClientTaskManager extends TaskManagable{
 
-    public static TaskManagable instance() {
-        return new Singleton<TaskManagable>() {
+    private static ClientTaskManager instance;
 
-            @Override
-            protected TaskManagable create() {
-                return new TaskManagable();
-            }
-        }.get();
+    public synchronized static ClientTaskManager instance() {
+        if (instance == null) {
+            instance = new ClientTaskManager();
+        }
+        return instance;
     }
 
 }

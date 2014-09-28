@@ -109,6 +109,11 @@ public class Taskable implements Parcelable {
         }
     }
 
+    @Override
+    public int hashCode() {
+        return (TextUtils.isEmpty(this.flag) ? "" : this.flag).hashCode();
+    }
+
     public boolean isSingleTask() {
         return singleTask;
     }

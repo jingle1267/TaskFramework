@@ -59,7 +59,8 @@ public class MyActivity extends Activity implements Consumable{
         taskable.setFlag("test");
         TestRequest request = new TestRequest();
         request.task = taskable;
-        ClientTaskManager.instance().regist(taskable, this);
+        boolean isRegistSuccess = ClientTaskManager.instance().regist(taskable, this);
+        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, taskable, request);
     }
 

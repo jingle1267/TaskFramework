@@ -16,6 +16,8 @@
 
 package com.worthed.framework.basic;
 
+import android.util.Log;
+
 import com.worthed.framework.Consumable;
 import com.worthed.framework.Responsable;
 import com.worthed.framework.Taskable;
@@ -31,6 +33,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TaskManagable {
 
+    private final boolean DEBUG = true;
+    private final String TAG = getClass().getSimpleName();
+
     protected ConcurrentHashMap<Taskable, List<Consumable>> consumers;
 
     public TaskManagable() {
@@ -40,11 +45,18 @@ public class TaskManagable {
     public boolean regist(Taskable task, Consumable consumer) {
         if (!consumers.containsKey(task)) {
             consumers.put(task, new Vector<Consumable>());
-        }
-        if (consumers.get(task).contains(consumer)) {
-            return false;
+        } else {
+            if (consumers.get(task).contains(consumer)) {
+                if (DEBUG) {
+                    Log.d(TAG, "consumers.get(task).contains(consumer)");
+                }
+                return false;
+            }
         }
         consumers.get(task).add(consumer);
+        if (DEBUG) {
+            Log.d(TAG, "consumers.size() : " + consumers.size() + " - " + consumers.hashCode());
+        }
         return true;
     }
 
@@ -62,9 +74,23 @@ public class TaskManagable {
     }
 
     public void consume(Responsable response) {
+        if (DEBUG) {
+            Log.d(TAG, "consume()");
+            Log.d(TAG, "consumers.size() : " + consumers.size() + " - " + consumers.hashCode());
+        }
         List<Consumable> consumables = consumers.get(response.task);
         if (consumables == null || consumables.size() < 1) {
+            if (DEBUG) {
+                if (consumables == null) {
+                    Log.d(TAG, "consumables == null");
+                } else {
+                    Log.d(TAG, "consumables.size() < 1");
+                }
+            }
             return;
+        }
+        if (DEBUG) {
+            Log.d(TAG, "consumables.size() : " + consumables.size());
         }
         List<Consumable> tmpConsumers = new ArrayList<Consumable>();
         for (Consumable consumer : consumables) {

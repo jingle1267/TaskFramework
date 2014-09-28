@@ -23,14 +23,13 @@ import com.worthed.framework.basic.TaskManagable;
  */
 public class ServiceTaskManager {
 
-    public static TaskManagable instance() {
-        return new Singleton<TaskManagable>() {
+    private static ClientTaskManager instance;
 
-            @Override
-            protected TaskManagable create() {
-                return new TaskManagable();
-            }
-        }.get();
+    public synchronized static ClientTaskManager instance() {
+        if (instance == null) {
+            instance = new ClientTaskManager();
+        }
+        return instance;
     }
 
 }
