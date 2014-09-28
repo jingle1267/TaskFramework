@@ -49,9 +49,13 @@ public class TaskServiceManager {
      * 发送任务
      */
     public static void send(Context context, Taskable task, Requestable request) {
+        if (task == null || request == null) {
+            return;
+        }
         Intent intent = new Intent(context, TaskService.class);
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Taskable.FLAG_TASK, task);
+        // bundle.putParcelable(Taskable.FLAG_TASK, task);
+        request.task = task;
         bundle.putParcelable(Requestable.FLAG_REQUST, request);
         intent.putExtras(bundle);
         context.startService(intent);

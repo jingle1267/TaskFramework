@@ -16,25 +16,50 @@
 
 package com.worthed.framework.basic;
 
-import com.worthed.framework.Executable;
-
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskThreadPoolSettings {
 
+    private final String TAG = getClass().getSimpleName();
+
     public int corePoolSize = 5;
     public int maxPoolSize = 10;
-    public long keetAliveTime = 20 * 1000;
-    public TimeUnit unit;
+    public long keepAliveTime = 20 * 1000;
     public LinkedBlockingQueue<Runnable> workQueue;
     public ThreadFactory threadFactory;
 
+    private static TaskThreadPoolSettings instance;
+
+    private TaskThreadPoolSettings() {
+        this.workQueue = new LinkedBlockingQueue<Runnable>(100);
+        this.threadFactory = new ThreadFactory() {
+            private AtomicInteger count = new AtomicInteger(1);
+            @Override
+            public Thread newThread(Runnable runnable) {
+                Thread thread = new Thread(runnable, TAG + " : " + count.getAndIncrement());
+                thread.setPriority(Thread.NORM_PRIORITY - 1);
+                return thread;
+            }
+        };
+    }
+
+    private TaskThreadPoolSettings(int corePoolSize, int maxPoolSize, long keepAliveTime) {
+        this();
+        this.corePoolSize = corePoolSize;
+        this.maxPoolSize = maxPoolSize;
+        this.keepAliveTime = keepAliveTime;
+    }
+
+    public static synchronized TaskThreadPoolSettings instance() {
+        if (instance == null) {
+            instance = new TaskThreadPoolSettings();
+        }
+        return instance;
+    }
 
 }

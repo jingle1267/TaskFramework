@@ -41,7 +41,7 @@ public class TaskService extends Service {
             clearTasks();
             return START_STICKY;
         }
-        if (intent.getExtras() != null) {
+        if (intent.getExtras() == null) {
             return START_STICKY;
         }
         Controller.instance(this).control(intent.getExtras());

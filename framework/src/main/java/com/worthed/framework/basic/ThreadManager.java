@@ -19,6 +19,7 @@ package com.worthed.framework.basic;
 import android.content.Context;
 
 import com.worthed.framework.Executable;
+import com.worthed.framework.Taskable;
 
 /**
  * 管理任务线程
@@ -35,16 +36,26 @@ public class ThreadManager {
         this.context = context;
         this.callbackable = callbackable;
         this.statable = statable;
-        TaskThreadPoolSettings settings = new TaskThreadPoolSettings();
+        TaskThreadPoolSettings settings = TaskThreadPoolSettings.instance();
         taskThreadPoolExecutor = new TaskThreadPoolExecutor(settings);
     }
 
-    public void addTask(Executable executable) {
-
+    public void addTask(final Executable executor) {
+        if (executor == null) {
+            return;
+        }
+        taskThreadPoolExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                statable.start();
+                executor.run(context, callbackable);
+                statable.end();
+            }
+        });
     }
 
     public void teminate() {
-
+        taskThreadPoolExecutor.shutdown();
     }
 
 }

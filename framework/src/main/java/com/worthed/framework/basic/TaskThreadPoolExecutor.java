@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class TaskThreadPoolExecutor extends ThreadPoolExecutor {
 
     public TaskThreadPoolExecutor(TaskThreadPoolSettings settings) {
-        super(settings.corePoolSize, settings.maxPoolSize, settings.keetAliveTime,
+        super(settings.corePoolSize, settings.maxPoolSize, settings.keepAliveTime,
                 TimeUnit.SECONDS, settings.workQueue, settings.threadFactory);
 
     }

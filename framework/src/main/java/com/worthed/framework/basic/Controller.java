@@ -17,10 +17,14 @@
 package com.worthed.framework.basic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.worthed.framework.ClientTaskManager;
+import com.worthed.framework.Requestable;
 import com.worthed.framework.Responsable;
 import com.worthed.framework.ServiceTaskManager;
+import com.worthed.framework.Taskable;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
@@ -47,21 +51,40 @@ public class Controller implements Callbackable, Statable {
     }
 
     public void control(Bundle bundle) {
-
+        Requestable request = bundle.getParcelable(Requestable.FLAG_REQUST);
+        Taskable task = request.task;
+        if (task.isSingleTask()) {
+            if (ClientTaskManager.instance().consumers.contains(task)
+                    || ServiceTaskManager.instance().consumers.contains(task)) {
+                return;
+            }
+        }
+        //request.settesk
+        if (task.isSyncTask()) {
+            request.getExecutable().run(context, this);
+            return;
+        }
+        threadManager.addTask(request.getExecutable());
     }
 
     public void clearTask() {
+        ClientTaskManager.instance().consumers.clear();
         ServiceTaskManager.instance().consumers.clear();
     }
 
     @Override
     public void callback(Responsable response) {
-
+        if (response.task.isServiceTask()) {
+            ServiceTaskManager.instance().consume(response);
+        } else {
+            Intent intent = new Intent();
+            intent.putExtra(Requestable.FLAG_REQUST, response);
+            context.sendBroadcast(intent);
+        }
     }
 
     @Override
     public void start() {
-
     }
 
     @Override

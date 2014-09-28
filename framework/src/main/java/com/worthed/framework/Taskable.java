@@ -18,13 +18,14 @@ package com.worthed.framework;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class Taskable implements Parcelable {
 
-    public final static String FLAG_TASK = "task_tag";
+    // public final static String FLAG_TASK = "task_tag";
 
     /**
      * 标识任务的类型
@@ -78,6 +79,23 @@ public class Taskable implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Taskable) {
+            Taskable task = (Taskable) o;
+            if (!TextUtils.isEmpty(task.flag) && !TextUtils.isEmpty(flag)
+                    && task.flag.equals(flag)) {
+                return true;
+            } if (TextUtils.isEmpty(task.flag) && TextUtils.isEmpty(flag)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public static final Creator<Taskable> CREATOR = new Creator<Taskable>() {

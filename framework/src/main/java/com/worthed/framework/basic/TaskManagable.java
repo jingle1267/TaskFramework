@@ -32,11 +32,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TaskManagable {
 
-    protected ConcurrentHashMap<Taskable, List<Consumable>> consumers =
-            new ConcurrentHashMap<Taskable, List<Consumable>>();
+    protected ConcurrentHashMap<Taskable, List<Consumable>> consumers;
 
     public TaskManagable() {
-
+        consumers = new ConcurrentHashMap<Taskable, List<Consumable>>();
     }
 
     protected boolean regist(Taskable task, Consumable consumer) {

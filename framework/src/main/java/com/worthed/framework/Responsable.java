@@ -16,10 +16,50 @@
 
 package com.worthed.framework;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Responsable {
+public class Responsable implements Parcelable {
+    public static final String FLAG_RESPONSE = "response_tag";
+
     public Taskable task;
+    public String errorCode, errorMsg;
+
+    public Responsable() {
+
+    }
+
+    public Responsable(Parcel source) {
+        this.errorCode = source.readString();
+        this.errorMsg = source.readString();
+        this.task = source.readParcelable(Taskable.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.errorCode);
+        parcel.writeString(this.errorMsg);
+        parcel.writeParcelable(this.task, i);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Responsable> CREATOR = new Creator<Responsable>() {
+        @Override
+        public Responsable createFromParcel(Parcel parcel) {
+            return new Responsable(parcel);
+        }
+
+        @Override
+        public Responsable[] newArray(int i) {
+            return new Responsable[i];
+        }
+    };
 
 }

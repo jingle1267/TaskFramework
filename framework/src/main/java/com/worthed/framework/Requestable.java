@@ -16,6 +16,7 @@
 
 package com.worthed.framework;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
@@ -24,6 +25,21 @@ import android.os.Parcelable;
 public abstract class Requestable implements Parcelable {
 
     public static final String FLAG_REQUST = "request_tag";
+
+    public Taskable task;
+
+    public Requestable () {
+
+    }
+
+    public Requestable(Parcel source) {
+        this.task = source.readParcelable(Taskable.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(this.task, i);
+    }
 
     /**
      * 获得任务执行器
