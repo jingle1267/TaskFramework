@@ -14,43 +14,32 @@
  *    limitations under the License.
  */
 
-package task.framework.worthed.com.taskframework.task;
+package com.worthed.framework.test.task;
 
-import android.os.Parcel;
+import android.content.Context;
+import android.util.Log;
 
 import com.worthed.framework.Executable;
 import com.worthed.framework.Requestable;
+import com.worthed.framework.Responsable;
+import com.worthed.framework.Taskable;
+import com.worthed.framework.basic.Callbackable;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
-public class TestRequest extends Requestable {
-    @Override
-    protected Executable instanceExecutable() {
-        return new TestExecutor(task, this);
-    }
+public class TestExecutor extends Executable {
 
-    public TestRequest(Parcel parcel) {
-        super(parcel);
-    }
-
-    public TestRequest() {
+    public TestExecutor(Taskable task, Requestable request) {
+        super(task, request);
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public Responsable run(Context context, Callbackable callbackable) {
+        Log.d("TestExecutor", "run()");
+        TestResponse response = new TestResponse();
+        response.task = task;
+        callbackable.callback(response);
+        return null;
     }
-
-    public static final Creator<TestRequest> CREATOR = new Creator<TestRequest>() {
-        @Override
-        public TestRequest createFromParcel(Parcel parcel) {
-            return new TestRequest(parcel);
-        }
-
-        @Override
-        public TestRequest[] newArray(int i) {
-            return new TestRequest[i];
-        }
-    };
 }

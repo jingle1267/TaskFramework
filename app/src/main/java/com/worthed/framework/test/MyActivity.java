@@ -1,4 +1,4 @@
-package task.framework.worthed.com.taskframework;
+package com.worthed.framework.test;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import com.worthed.framework.Responsable;
 import com.worthed.framework.TaskServiceManager;
 import com.worthed.framework.Taskable;
 
-import task.framework.worthed.com.taskframework.task.TestRequest;
+import task.framework.worthed.com.taskframework.R;
+
+import com.worthed.framework.test.task.TestRequest;
 
 
 public class MyActivity extends Activity implements Consumable{
@@ -31,7 +33,7 @@ public class MyActivity extends Activity implements Consumable{
     @Override
     protected void onResume() {
         super.onResume();
-        test();
+        testSyncTask();
     }
 
     @Override
@@ -53,8 +55,8 @@ public class MyActivity extends Activity implements Consumable{
         return super.onOptionsItemSelected(item);
     }
 
-    public void test() {
-        Log.d(TAG, "test()");
+    public void testSyncTask() {
+        Log.d(TAG, "testSyncTask()");
         Taskable taskable = new Taskable();
         taskable.setFlag("test");
         TestRequest request = new TestRequest();
@@ -62,6 +64,11 @@ public class MyActivity extends Activity implements Consumable{
         boolean isRegistSuccess = ClientTaskManager.instance().regist(taskable, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, taskable, request);
+    }
+
+    public void testAsyncTask() {
+        Log.d(TAG, "testAsyncTask");
+
     }
 
     @Override
