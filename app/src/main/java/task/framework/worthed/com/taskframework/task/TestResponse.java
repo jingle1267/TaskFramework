@@ -18,7 +18,6 @@ package task.framework.worthed.com.taskframework.task;
 
 import android.os.Parcel;
 
-import com.worthed.framework.Executable;
 import com.worthed.framework.Responsable;
 
 /**

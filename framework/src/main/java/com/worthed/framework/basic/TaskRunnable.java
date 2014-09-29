@@ -14,34 +14,17 @@
  *    limitations under the License.
  */
 
-package task.framework.worthed.com.taskframework.task;
+package com.worthed.framework.basic;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.worthed.framework.Executable;
-import com.worthed.framework.Requestable;
 import com.worthed.framework.Responsable;
-import com.worthed.framework.Taskable;
-import com.worthed.framework.basic.Callbackable;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
-public class TestExecutor extends Executable {
+public interface TaskRunnable {
+    
+    public Responsable run(Context context, Callbackable callbackable);
 
-    public TestExecutor(Taskable task, Requestable request) {
-        super(task, request);
-    }
-
-    @Override
-    public Responsable run(Context context, Callbackable callbackable) {
-        Log.d("", "run()");
-        TestResponse response = new TestResponse();
-        Taskable taskable = new Taskable();
-        taskable.setFlag("test");
-        response.task = taskable;
-        callbackable.callback(response);
-        return null;
-    }
 }

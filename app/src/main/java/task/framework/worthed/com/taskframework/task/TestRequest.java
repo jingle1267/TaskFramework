@@ -17,7 +17,6 @@
 package task.framework.worthed.com.taskframework.task;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import com.worthed.framework.Executable;
 import com.worthed.framework.Requestable;
@@ -28,7 +27,7 @@ import com.worthed.framework.Requestable;
 public class TestRequest extends Requestable {
     @Override
     protected Executable instanceExecutable() {
-        return new TestExecutor();
+        return new TestExecutor(task, this);
     }
 
     public TestRequest(Parcel parcel) {
