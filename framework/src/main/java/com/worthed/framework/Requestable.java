@@ -28,8 +28,8 @@ public abstract class Requestable implements Parcelable {
 
     public Taskable task;
 
-    public Requestable() {
-
+    public Requestable(Taskable task) {
+        this.task = task;
     }
 
     public Requestable(Parcel source) {

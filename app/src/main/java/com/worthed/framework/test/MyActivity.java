@@ -33,7 +33,8 @@ public class MyActivity extends Activity implements Consumable{
     @Override
     protected void onResume() {
         super.onResume();
-        testSyncTask();
+        // testSyncTask();
+        testAsyncTask();
     }
 
     @Override
@@ -58,9 +59,9 @@ public class MyActivity extends Activity implements Consumable{
     public void testSyncTask() {
         Log.d(TAG, "testSyncTask()");
         Taskable taskable = new Taskable();
-        taskable.setFlag("test");
-        TestRequest request = new TestRequest();
-        request.task = taskable;
+        taskable.setFlag("testSync");
+        TestRequest request = new TestRequest(taskable);
+//        request.task = taskable;
         boolean isRegistSuccess = ClientTaskManager.instance().regist(taskable, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, taskable, request);
@@ -68,7 +69,14 @@ public class MyActivity extends Activity implements Consumable{
 
     public void testAsyncTask() {
         Log.d(TAG, "testAsyncTask");
-
+        Taskable task = new Taskable();
+        task.setFlag("testAsync");
+        task.setSyncTask(false);
+        TestRequest request = new TestRequest(task);
+//        request.task = task;
+        boolean isRegistSuccess = ClientTaskManager.instance().regist(task, this);
+        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
+        TaskServiceManager.send(this, task, request);
     }
 
     @Override

@@ -20,11 +20,16 @@ import android.os.Parcel;
 
 import com.worthed.framework.Executable;
 import com.worthed.framework.Requestable;
+import com.worthed.framework.Taskable;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
 public class TestRequest extends Requestable {
+    public TestRequest(Taskable task) {
+        super(task);
+    }
+
     @Override
     protected Executable instanceExecutable() {
         return new TestExecutor(task, this);
@@ -32,9 +37,6 @@ public class TestRequest extends Requestable {
 
     public TestRequest(Parcel parcel) {
         super(parcel);
-    }
-
-    public TestRequest() {
     }
 
     @Override
