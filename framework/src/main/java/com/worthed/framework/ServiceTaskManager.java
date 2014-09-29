@@ -16,8 +16,6 @@
 
 package com.worthed.framework;
 
-import com.worthed.framework.basic.TaskManagable;
-
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */

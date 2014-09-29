@@ -25,19 +25,6 @@ import com.worthed.framework.Responsable;
  */
 public class TestResponse extends Responsable {
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public TestResponse() {
-
-    }
-
-    public TestResponse(Parcel parcel) {
-        super(parcel);
-    }
-
     public static final Creator<TestResponse> CREATOR = new Creator<TestResponse>() {
         @Override
         public TestResponse createFromParcel(Parcel parcel) {
@@ -49,5 +36,18 @@ public class TestResponse extends Responsable {
             return new TestResponse[i];
         }
     };
+
+    public TestResponse() {
+
+    }
+
+    public TestResponse(Parcel parcel) {
+        super(parcel);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
 }

@@ -5,19 +5,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.worthed.framework.ClientTaskManager;
 import com.worthed.framework.Consumable;
 import com.worthed.framework.Responsable;
 import com.worthed.framework.TaskServiceManager;
 import com.worthed.framework.Taskable;
+import com.worthed.framework.test.task.TestRequest;
 
 import task.framework.worthed.com.taskframework.R;
 
-import com.worthed.framework.test.task.TestRequest;
 
-
-public class MyActivity extends Activity implements Consumable{
+public class MyActivity extends Activity implements Consumable {
 
     private final String TAG = getClass().getSimpleName();
 
@@ -33,8 +33,6 @@ public class MyActivity extends Activity implements Consumable{
     @Override
     protected void onResume() {
         super.onResume();
-        // testSyncTask();
-        testAsyncTask();
     }
 
     @Override
@@ -56,24 +54,22 @@ public class MyActivity extends Activity implements Consumable{
         return super.onOptionsItemSelected(item);
     }
 
-    public void testSyncTask() {
+    public void testSyncTask(View view) {
         Log.d(TAG, "testSyncTask()");
         Taskable taskable = new Taskable();
         taskable.setFlag("testSync");
         TestRequest request = new TestRequest(taskable);
-//        request.task = taskable;
         boolean isRegistSuccess = ClientTaskManager.instance().regist(taskable, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, taskable, request);
     }
 
-    public void testAsyncTask() {
+    public void testAsyncTask(View view) {
         Log.d(TAG, "testAsyncTask");
         Taskable task = new Taskable();
         task.setFlag("testAsync");
         task.setSyncTask(false);
         TestRequest request = new TestRequest(task);
-//        request.task = task;
         boolean isRegistSuccess = ClientTaskManager.instance().regist(task, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, task, request);
@@ -82,5 +78,8 @@ public class MyActivity extends Activity implements Consumable{
     @Override
     public void consume(Responsable response) {
         Log.d(TAG, "consume()");
+        Taskable task = response.task;
+        Log.d(TAG, "consume() flag : " + task.getFlag());
+        ClientTaskManager.instance().unregist(task, this);
     }
 }

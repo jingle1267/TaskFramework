@@ -21,7 +21,7 @@ import com.worthed.framework.basic.TaskManagable;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class ClientTaskManager extends TaskManagable{
+public class ClientTaskManager extends TaskManagable {
 
     private static ClientTaskManager instance;
 

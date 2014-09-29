@@ -17,8 +17,6 @@
 package com.worthed.framework.basic;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.worthed.framework.ClientTaskManager;
@@ -32,12 +30,10 @@ import com.worthed.framework.Taskable;
  */
 public class Controller implements Callbackable, Statable {
 
-    private final boolean DEBUG = true;
-    private final String TAG = getClass().getSimpleName();
-
     private static Context context;
     private static Controller instance;
-
+    private final boolean DEBUG = true;
+    private final String TAG = getClass().getSimpleName();
     private ThreadManager threadManager;
 
     private Controller(Context context) {

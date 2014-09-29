@@ -28,10 +28,9 @@ import com.worthed.framework.Requestable;
  */
 public class TaskService extends Service {
 
+    public static final String FLAG_TASK_CLEAR = "clear_task_tag";
     private final boolean DEBUG = true;
     private final String TAG = getClass().getSimpleName();
-
-    public static final String FLAG_TASK_CLEAR = "clear_task_tag";
 
     @Override
     public void onCreate() {

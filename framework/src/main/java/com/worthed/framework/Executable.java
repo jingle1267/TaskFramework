@@ -16,15 +16,12 @@
 
 package com.worthed.framework;
 
-import android.content.Context;
-
-import com.worthed.framework.basic.Callbackable;
 import com.worthed.framework.basic.TaskRunnable;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Executable implements TaskRunnable{
+public abstract class Executable implements TaskRunnable {
 
     public Requestable request;
     public Taskable task;

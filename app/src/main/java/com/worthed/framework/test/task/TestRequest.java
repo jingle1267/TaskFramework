@@ -26,24 +26,6 @@ import com.worthed.framework.Taskable;
  * Created by jingle1267@163.com on 14-9-29.
  */
 public class TestRequest extends Requestable {
-    public TestRequest(Taskable task) {
-        super(task);
-    }
-
-    @Override
-    protected Executable instanceExecutable() {
-        return new TestExecutor(task, this);
-    }
-
-    public TestRequest(Parcel parcel) {
-        super(parcel);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     public static final Creator<TestRequest> CREATOR = new Creator<TestRequest>() {
         @Override
         public TestRequest createFromParcel(Parcel parcel) {
@@ -55,4 +37,22 @@ public class TestRequest extends Requestable {
             return new TestRequest[i];
         }
     };
+
+    public TestRequest(Taskable task) {
+        super(task);
+    }
+
+    public TestRequest(Parcel parcel) {
+        super(parcel);
+    }
+
+    @Override
+    protected Executable instanceExecutable() {
+        return new TestExecutor(task, this);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 }
