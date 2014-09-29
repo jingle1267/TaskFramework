@@ -78,7 +78,7 @@ public class MyActivity extends Activity implements Consumable {
     @Override
     public void consume(Responsable response) {
         Log.d(TAG, "consume()");
-        Taskable task = response.task;
+        Taskable task = response.getTask();
         Log.d(TAG, "consume() flag : " + task.getFlag());
         ClientTaskManager.instance().unregist(task, this);
     }

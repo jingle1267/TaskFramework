@@ -23,11 +23,19 @@ import com.worthed.framework.basic.TaskRunnable;
  */
 public abstract class Executable implements TaskRunnable {
 
-    public Requestable request;
-    public Taskable task;
+    protected Requestable request;
+    protected Taskable task;
 
     protected Executable(Taskable task, Requestable request) {
         this.task = task;
         this.request = request;
+    }
+
+    public Taskable getTask() {
+        return task;
+    }
+
+    public Requestable getRequest() {
+        return request;
     }
 }

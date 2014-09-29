@@ -35,11 +35,35 @@ public class Responsable implements Parcelable {
             return new Responsable[i];
         }
     };
-    public Taskable task;
-    public String errorCode, errorMsg;
+    protected Taskable task;
+    protected String errorCode, errorMsg;
 
     public Responsable() {
 
+    }
+
+    public void setTask(Taskable task) {
+        this.task = task;
+    }
+
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    public Taskable getTask() {
+        return task;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
     public Responsable(Parcel source) {

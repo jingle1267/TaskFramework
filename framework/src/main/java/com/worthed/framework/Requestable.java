@@ -26,10 +26,14 @@ public abstract class Requestable implements Parcelable {
 
     public static final String FLAG_REQUST = "request_tag";
 
-    public Taskable task;
+    protected Taskable task;
 
     public Requestable(Taskable task) {
         this.task = task;
+    }
+
+    public Taskable getTask() {
+        return task;
     }
 
     public Requestable(Parcel source) {

@@ -38,7 +38,7 @@ public class TestExecutor extends Executable {
     public Responsable run(Context context, Callbackable callbackable) {
         Log.d("TestExecutor", "run()");
         TestResponse response = new TestResponse();
-        response.task = task;
+        response.setTask(task);
         callbackable.callback(response);
         return null;
     }

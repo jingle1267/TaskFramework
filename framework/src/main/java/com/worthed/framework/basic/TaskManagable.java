@@ -78,7 +78,7 @@ public class TaskManagable {
             Log.d(TAG, "consume()");
             Log.d(TAG, "consumers.size() : " + consumers.size() + " - " + consumers.hashCode());
         }
-        List<Consumable> consumables = consumers.get(response.task);
+        List<Consumable> consumables = consumers.get(response.getTask());
         if (consumables == null || consumables.size() < 1) {
             if (DEBUG) {
                 if (consumables == null) {

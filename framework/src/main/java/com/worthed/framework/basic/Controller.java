@@ -54,7 +54,7 @@ public class Controller implements Callbackable, Statable {
         if (DEBUG) {
             Log.d(TAG, "control()");
         }
-        Taskable task = request.task;
+        Taskable task = request.getTask();
         if (task.isSingleTask()) {
             if (ClientTaskManager.instance().consumers.contains(task)
                     || ServiceTaskManager.instance().consumers.contains(task)) {
@@ -82,7 +82,7 @@ public class Controller implements Callbackable, Statable {
         if (DEBUG) {
             Log.d(TAG, "callback()");
         }
-        if (response.task.isServiceTask()) {
+        if (response.getTask().isServiceTask()) {
             ServiceTaskManager.instance().consume(response);
         } else {
             ClientTaskManager.instance().consume(response);
