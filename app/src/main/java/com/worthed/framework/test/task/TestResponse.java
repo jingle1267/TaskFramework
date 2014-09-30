@@ -18,12 +18,12 @@ package com.worthed.framework.test.task;
 
 import android.os.Parcel;
 
-import com.worthed.framework.Responsable;
+import com.worthed.framework.Response;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
-public class TestResponse extends Responsable {
+public class TestResponse extends Response {
 
     public static final Creator<TestResponse> CREATOR = new Creator<TestResponse>() {
         @Override

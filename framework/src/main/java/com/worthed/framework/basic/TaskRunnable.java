@@ -18,13 +18,13 @@ package com.worthed.framework.basic;
 
 import android.content.Context;
 
-import com.worthed.framework.Responsable;
+import com.worthed.framework.Response;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
 public interface TaskRunnable {
-    
-    public Responsable run(Context context, Callbackable callbackable);
+
+    public Response run(Context context, Callback callback);
 
 }

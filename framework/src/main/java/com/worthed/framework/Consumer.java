@@ -19,8 +19,8 @@ package com.worthed.framework;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public interface Consumable {
+public interface Consumer {
 
-    public void consume(Responsable response);
+    public void consume(Response response);
 
 }

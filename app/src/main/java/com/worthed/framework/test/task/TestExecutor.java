@@ -19,27 +19,27 @@ package com.worthed.framework.test.task;
 import android.content.Context;
 import android.util.Log;
 
-import com.worthed.framework.Executable;
-import com.worthed.framework.Requestable;
-import com.worthed.framework.Responsable;
-import com.worthed.framework.Taskable;
-import com.worthed.framework.basic.Callbackable;
+import com.worthed.framework.Executor;
+import com.worthed.framework.Request;
+import com.worthed.framework.Response;
+import com.worthed.framework.Task;
+import com.worthed.framework.basic.Callback;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
-public class TestExecutor extends Executable {
+public class TestExecutor extends Executor {
 
-    public TestExecutor(Taskable task, Requestable request) {
+    public TestExecutor(Task task, Request request) {
         super(task, request);
     }
 
     @Override
-    public Responsable run(Context context, Callbackable callbackable) {
+    public Response run(Context context, Callback callback) {
         Log.d("TestExecutor", "run()");
         TestResponse response = new TestResponse();
         response.setTask(task);
-        callbackable.callback(response);
+        callback.callback(response);
         return null;
     }
 }

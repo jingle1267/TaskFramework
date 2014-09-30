@@ -18,7 +18,7 @@ package com.worthed.framework.basic;
 
 import android.content.Context;
 
-import com.worthed.framework.Executable;
+import com.worthed.framework.Executor;
 
 /**
  * 管理任务线程
@@ -27,11 +27,11 @@ import com.worthed.framework.Executable;
 public class ThreadManager {
 
     private Context context;
-    private Callbackable callback;
-    private Statable state;
+    private Callback callback;
+    private State state;
     private TaskThreadPoolExecutor taskThreadPoolExecutor;
 
-    public ThreadManager(Context context, Callbackable callback, Statable state) {
+    public ThreadManager(Context context, Callback callback, State state) {
         this.context = context;
         this.callback = callback;
         this.state = state;
@@ -39,7 +39,7 @@ public class ThreadManager {
         taskThreadPoolExecutor = new TaskThreadPoolExecutor(settings);
     }
 
-    public void addTask(final Executable executor) {
+    public void addTask(final Executor executor) {
         if (executor == null) {
             return;
         }

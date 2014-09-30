@@ -53,7 +53,7 @@ public class TaskServiceManager {
     /**
      * 发送任务
      */
-    public static void send(Context context, Taskable task, Requestable request) {
+    public static void send(Context context, Task task, Request request) {
         if (DEBUG) {
             Log.d(TAG, "send()");
         }
@@ -69,7 +69,7 @@ public class TaskServiceManager {
         request.task = task;
         // bundle.putParcelable(Requestable.FLAG_REQUST, request);
         // intent.putExtras(bundle);
-        intent.putExtra(Requestable.FLAG_REQUST, request);
+        intent.putExtra(Request.FLAG_REQUST, request);
         context.startService(intent);
     }
 

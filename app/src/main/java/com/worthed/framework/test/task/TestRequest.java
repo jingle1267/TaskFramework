@@ -18,14 +18,14 @@ package com.worthed.framework.test.task;
 
 import android.os.Parcel;
 
-import com.worthed.framework.Executable;
-import com.worthed.framework.Requestable;
-import com.worthed.framework.Taskable;
+import com.worthed.framework.Executor;
+import com.worthed.framework.Request;
+import com.worthed.framework.Task;
 
 /**
  * Created by jingle1267@163.com on 14-9-29.
  */
-public class TestRequest extends Requestable {
+public class TestRequest extends Request {
     public static final Creator<TestRequest> CREATOR = new Creator<TestRequest>() {
         @Override
         public TestRequest createFromParcel(Parcel parcel) {
@@ -38,7 +38,7 @@ public class TestRequest extends Requestable {
         }
     };
 
-    public TestRequest(Taskable task) {
+    public TestRequest(Task task) {
         super(task);
     }
 
@@ -47,7 +47,7 @@ public class TestRequest extends Requestable {
     }
 
     @Override
-    protected Executable instanceExecutable() {
+    protected Executor instanceExecutable() {
         return new TestExecutor(task, this);
     }
 

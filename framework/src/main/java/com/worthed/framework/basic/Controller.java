@@ -20,15 +20,15 @@ import android.content.Context;
 import android.util.Log;
 
 import com.worthed.framework.ClientTaskManager;
-import com.worthed.framework.Requestable;
-import com.worthed.framework.Responsable;
+import com.worthed.framework.Request;
+import com.worthed.framework.Response;
 import com.worthed.framework.ServiceTaskManager;
-import com.worthed.framework.Taskable;
+import com.worthed.framework.Task;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class Controller implements Callbackable, Statable {
+public class Controller implements Callback, State {
 
     private static Context context;
     private static Controller instance;
@@ -50,11 +50,11 @@ public class Controller implements Callbackable, Statable {
         return instance;
     }
 
-    public void control(Requestable request) {
+    public void control(Request request) {
         if (DEBUG) {
             Log.d(TAG, "control()");
         }
-        Taskable task = request.getTask();
+        Task task = request.getTask();
         if (task.isSingleTask()) {
             if (ClientTaskManager.instance().consumers.contains(task)
                     || ServiceTaskManager.instance().consumers.contains(task)) {
@@ -78,7 +78,7 @@ public class Controller implements Callbackable, Statable {
     }
 
     @Override
-    public void callback(Responsable response) {
+    public void callback(Response response) {
         if (DEBUG) {
             Log.d(TAG, "callback()");
         }

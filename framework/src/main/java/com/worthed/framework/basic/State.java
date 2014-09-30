@@ -19,7 +19,7 @@ package com.worthed.framework.basic;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public interface Statable {
+public interface State {
 
     public void start();
 

@@ -8,16 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.worthed.framework.ClientTaskManager;
-import com.worthed.framework.Consumable;
-import com.worthed.framework.Responsable;
+import com.worthed.framework.Consumer;
+import com.worthed.framework.Response;
+import com.worthed.framework.Task;
 import com.worthed.framework.TaskServiceManager;
-import com.worthed.framework.Taskable;
 import com.worthed.framework.test.task.TestRequest;
 
 import task.framework.worthed.com.taskframework.R;
 
 
-public class MyActivity extends Activity implements Consumable {
+public class MyActivity extends Activity implements Consumer {
 
     private final String TAG = getClass().getSimpleName();
 
@@ -56,30 +56,30 @@ public class MyActivity extends Activity implements Consumable {
 
     public void testSyncTask(View view) {
         Log.d(TAG, "testSyncTask()");
-        Taskable taskable = new Taskable();
+        Task taskable = new Task();
         taskable.setFlag("testSync");
         TestRequest request = new TestRequest(taskable);
-        boolean isRegistSuccess = ClientTaskManager.instance().regist(taskable, this);
+        boolean isRegistSuccess = ClientTaskManager.instance().register(taskable, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, taskable, request);
     }
 
     public void testAsyncTask(View view) {
         Log.d(TAG, "testAsyncTask");
-        Taskable task = new Taskable();
+        Task task = new Task();
         task.setFlag("testAsync");
         task.setSyncTask(false);
         TestRequest request = new TestRequest(task);
-        boolean isRegistSuccess = ClientTaskManager.instance().regist(task, this);
+        boolean isRegistSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, task, request);
     }
 
     @Override
-    public void consume(Responsable response) {
+    public void consume(Response response) {
         Log.d(TAG, "consume()");
-        Taskable task = response.getTask();
+        Task task = response.getTask();
         Log.d(TAG, "consume() flag : " + task.getFlag());
-        ClientTaskManager.instance().unregist(task, this);
+        ClientTaskManager.instance().unregister(task, this);
     }
 }

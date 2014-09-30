@@ -23,19 +23,19 @@ import android.text.TextUtils;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class Taskable implements Parcelable {
+public class Task implements Parcelable {
 
     // public final static String FLAG_TASK = "task_tag";
 
-    public static final Creator<Taskable> CREATOR = new Creator<Taskable>() {
+    public static final Creator<Task> CREATOR = new Creator<Task>() {
         @Override
-        public Taskable createFromParcel(Parcel parcel) {
-            return new Taskable(parcel);
+        public Task createFromParcel(Parcel parcel) {
+            return new Task(parcel);
         }
 
         @Override
-        public Taskable[] newArray(int i) {
-            return new Taskable[i];
+        public Task[] newArray(int i) {
+            return new Task[i];
         }
     };
     /**
@@ -63,11 +63,11 @@ public class Taskable implements Parcelable {
      */
     protected boolean saveCache = false;
 
-    public Taskable() {
+    public Task() {
 
     }
 
-    public Taskable(Parcel source) {
+    public Task(Parcel source) {
         this.flag = source.readString();
         this.singleTask = source.readInt() == 0 ? false : true;
         this.syncTask = source.readInt() == 0 ? false : true;
@@ -93,8 +93,8 @@ public class Taskable implements Parcelable {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof Taskable) {
-            Taskable task = (Taskable) o;
+        if (o instanceof Task) {
+            Task task = (Task) o;
             if (!TextUtils.isEmpty(task.flag) && !TextUtils.isEmpty(flag)
                     && task.flag.equals(flag)) {
                 return true;

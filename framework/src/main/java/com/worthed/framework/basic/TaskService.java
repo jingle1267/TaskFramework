@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.worthed.framework.Requestable;
+import com.worthed.framework.Request;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
@@ -52,8 +52,8 @@ public class TaskService extends Service {
         // if (intent.getExtras() == null) {
         //    return START_STICKY;
         // }
-        if (intent.hasExtra(Requestable.FLAG_REQUST)) {
-            Requestable request = intent.getParcelableExtra(Requestable.FLAG_REQUST);
+        if (intent.hasExtra(Request.FLAG_REQUST)) {
+            Request request = intent.getParcelableExtra(Request.FLAG_REQUST);
             if (request != null) {
                 Controller.instance(this).control(request);
             } else {

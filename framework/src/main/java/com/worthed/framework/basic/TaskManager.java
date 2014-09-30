@@ -18,9 +18,9 @@ package com.worthed.framework.basic;
 
 import android.util.Log;
 
-import com.worthed.framework.Consumable;
-import com.worthed.framework.Responsable;
-import com.worthed.framework.Taskable;
+import com.worthed.framework.Consumer;
+import com.worthed.framework.Response;
+import com.worthed.framework.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,20 +31,20 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class TaskManagable {
+public class TaskManager {
 
     private final boolean DEBUG = true;
     private final String TAG = getClass().getSimpleName();
 
-    protected ConcurrentHashMap<Taskable, List<Consumable>> consumers;
+    protected ConcurrentHashMap<Task, List<Consumer>> consumers;
 
-    public TaskManagable() {
-        consumers = new ConcurrentHashMap<Taskable, List<Consumable>>();
+    public TaskManager() {
+        consumers = new ConcurrentHashMap<Task, List<Consumer>>();
     }
 
-    public boolean regist(Taskable task, Consumable consumer) {
+    public boolean register(Task task, Consumer consumer) {
         if (!consumers.containsKey(task)) {
-            consumers.put(task, new Vector<Consumable>());
+            consumers.put(task, new Vector<Consumer>());
         } else {
             if (consumers.get(task).contains(consumer)) {
                 if (DEBUG) {
@@ -60,7 +60,7 @@ public class TaskManagable {
         return true;
     }
 
-    public boolean unregist(Taskable task, Consumable consumer) {
+    public boolean unregister(Task task, Consumer consumer) {
         if (!consumers.containsKey(task)) {
             return false;
         }
@@ -73,15 +73,15 @@ public class TaskManagable {
         return true;
     }
 
-    public void consume(Responsable response) {
+    public void consume(Response response) {
         if (DEBUG) {
             Log.d(TAG, "consume()");
-            Log.d(TAG, "consumers.size() : " + consumers.size() + " - " + consumers.hashCode());
+            Log.d(TAG, "consumers.size() : " + this.consumers.size() + " - " + this.consumers.hashCode());
         }
-        List<Consumable> consumables = consumers.get(response.getTask());
-        if (consumables == null || consumables.size() < 1) {
+        List<Consumer> consumers = this.consumers.get(response.getTask());
+        if (consumers == null || consumers.size() < 1) {
             if (DEBUG) {
-                if (consumables == null) {
+                if (consumers == null) {
                     Log.d(TAG, "consumables == null");
                 } else {
                     Log.d(TAG, "consumables.size() < 1");
@@ -90,54 +90,54 @@ public class TaskManagable {
             return;
         }
         if (DEBUG) {
-            Log.d(TAG, "consumables.size() : " + consumables.size());
+            Log.d(TAG, "consumables.size() : " + consumers.size());
         }
-        List<Consumable> tmpConsumers = new ArrayList<Consumable>();
-        for (Consumable consumer : consumables) {
+        List<Consumer> tmpConsumers = new ArrayList<Consumer>();
+        for (Consumer consumer : consumers) {
             tmpConsumers.add(consumer);
         }
-        for (Consumable consumer : tmpConsumers) {
+        for (Consumer consumer : tmpConsumers) {
             consumer.consume(response);
         }
     }
 
-    public void removeConsumer(Consumable consumer) {
-        Iterator<Taskable> it = consumers.keySet().iterator();
-        Taskable task;
-        List<Consumable> consumables;
+    public void removeConsumer(Consumer consumer) {
+        Iterator<Task> it = this.consumers.keySet().iterator();
+        Task task;
+        List<Consumer> consumers;
         while (it.hasNext()) {
             task = it.next();
-            consumables = consumers.get(task);
-            if (consumables == null || consumables.isEmpty()) {
-                consumers.remove(task);
+            consumers = this.consumers.get(task);
+            if (consumers == null || consumers.isEmpty()) {
+                this.consumers.remove(task);
                 continue;
             }
-            if (consumables.contains(consumer)) {
-                consumables.remove(consumer);
+            if (consumers.contains(consumer)) {
+                consumers.remove(consumer);
             }
-            if (consumables.isEmpty()) {
-                consumables.remove(task);
+            if (consumers.isEmpty()) {
+                consumers.remove(task);
             }
         }
     }
 
     public void clearConsumer() {
-        if (consumers == null) {
+        if (this.consumers == null) {
             return;
         }
-        Iterator<Taskable> it = consumers.keySet().iterator();
-        Taskable task;
-        List<Consumable> consumables;
+        Iterator<Task> it = this.consumers.keySet().iterator();
+        Task task;
+        List<Consumer> consumers;
         while (it.hasNext()) {
             task = it.next();
-            consumables = consumers.get(task);
-            if (consumables == null || consumables.isEmpty()) {
-                consumers.remove(task);
+            consumers = this.consumers.get(task);
+            if (consumers == null || consumers.isEmpty()) {
+                this.consumers.remove(task);
                 continue;
             }
-            consumables.clear();
-            if (consumables.isEmpty()) {
-                consumers.remove(task);
+            consumers.clear();
+            if (consumers.isEmpty()) {
+                this.consumers.remove(task);
             }
         }
 

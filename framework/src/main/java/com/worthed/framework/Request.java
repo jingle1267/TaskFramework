@@ -22,22 +22,22 @@ import android.os.Parcelable;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Requestable implements Parcelable {
+public abstract class Request implements Parcelable {
 
     public static final String FLAG_REQUST = "request_tag";
 
-    protected Taskable task;
+    protected Task task;
 
-    public Requestable(Taskable task) {
+    public Request(Task task) {
         this.task = task;
     }
 
-    public Taskable getTask() {
+    public Task getTask() {
         return task;
     }
 
-    public Requestable(Parcel source) {
-        this.task = source.readParcelable(Taskable.class.getClassLoader());
+    public Request(Parcel source) {
+        this.task = source.readParcelable(Task.class.getClassLoader());
     }
 
     @Override
@@ -50,11 +50,11 @@ public abstract class Requestable implements Parcelable {
      *
      * @return
      */
-    public Executable getExecutable() {
+    public Executor getExecutable() {
         return instanceExecutable();
     }
 
-    protected abstract Executable instanceExecutable();
+    protected abstract Executor instanceExecutable();
 
 
 }

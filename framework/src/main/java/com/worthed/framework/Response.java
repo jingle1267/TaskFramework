@@ -22,27 +22,27 @@ import android.os.Parcelable;
 /**
  * Created by jingle1267@163.com on 14-9-28.
  */
-public class Responsable implements Parcelable {
+public class Response implements Parcelable {
     public static final String FLAG_RESPONSE = "response_tag";
-    public static final Creator<Responsable> CREATOR = new Creator<Responsable>() {
+    public static final Creator<Response> CREATOR = new Creator<Response>() {
         @Override
-        public Responsable createFromParcel(Parcel parcel) {
-            return new Responsable(parcel);
+        public Response createFromParcel(Parcel parcel) {
+            return new Response(parcel);
         }
 
         @Override
-        public Responsable[] newArray(int i) {
-            return new Responsable[i];
+        public Response[] newArray(int i) {
+            return new Response[i];
         }
     };
-    protected Taskable task;
+    protected Task task;
     protected String errorCode, errorMsg;
 
-    public Responsable() {
+    public Response() {
 
     }
 
-    public void setTask(Taskable task) {
+    public void setTask(Task task) {
         this.task = task;
     }
 
@@ -54,7 +54,7 @@ public class Responsable implements Parcelable {
         this.errorMsg = errorMsg;
     }
 
-    public Taskable getTask() {
+    public Task getTask() {
         return task;
     }
 
@@ -66,10 +66,10 @@ public class Responsable implements Parcelable {
         return errorMsg;
     }
 
-    public Responsable(Parcel source) {
+    public Response(Parcel source) {
         this.errorCode = source.readString();
         this.errorMsg = source.readString();
-        this.task = source.readParcelable(Taskable.class.getClassLoader());
+        this.task = source.readParcelable(Task.class.getClassLoader());
     }
 
     @Override

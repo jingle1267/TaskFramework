@@ -14,24 +14,15 @@
  *    limitations under the License.
  */
 
-package com.worthed.framework;
+package com.worthed.framework.basic;
+
+import com.worthed.framework.Response;
 
 /**
- * Singleton helper class for lazily initialization.
- * <p/>
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Singleton<T> {
-    private T mInstance;
+public interface Callback {
 
-    protected abstract T create();
+    public void callback(Response response);
 
-    public final T get() {
-        synchronized (this) {
-            if (mInstance == null) {
-                mInstance = create();
-            }
-            return mInstance;
-        }
-    }
 }
