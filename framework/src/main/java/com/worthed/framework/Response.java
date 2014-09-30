@@ -38,11 +38,7 @@ public class Response implements Parcelable {
     protected Task task;
     protected String errorCode, errorMsg;
 
-    public Response() {
-
-    }
-
-    public void setTask(Task task) {
+    public Response(Task task) {
         this.task = task;
     }
 

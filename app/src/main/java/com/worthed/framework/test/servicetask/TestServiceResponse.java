@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package com.worthed.framework.test.task;
+package com.worthed.framework.test.servicetask;
 
 import android.os.Parcel;
 
@@ -22,33 +22,27 @@ import com.worthed.framework.Response;
 import com.worthed.framework.Task;
 
 /**
- * Created by jingle1267@163.com on 14-9-29.
+ * Created by jingle1267@163.com on 14-10-1.
  */
-public class TestResponse extends Response {
+public class TestServiceResponse extends Response {
 
-    public static final Creator<TestResponse> CREATOR = new Creator<TestResponse>() {
+    public static final Creator<TestServiceResponse> CREATOR = new Creator<TestServiceResponse>() {
         @Override
-        public TestResponse createFromParcel(Parcel parcel) {
-            return new TestResponse(parcel);
+        public TestServiceResponse createFromParcel(Parcel parcel) {
+            return new TestServiceResponse(parcel);
         }
 
         @Override
-        public TestResponse[] newArray(int i) {
-            return new TestResponse[i];
+        public TestServiceResponse[] newArray(int i) {
+            return new TestServiceResponse[i];
         }
     };
 
-    public TestResponse(Parcel parcel) {
+    public TestServiceResponse(Parcel parcel) {
         super(parcel);
     }
 
-    public TestResponse(Task task) {
+    public TestServiceResponse(Task task) {
         super(task);
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
 }

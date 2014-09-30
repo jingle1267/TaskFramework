@@ -50,11 +50,11 @@ public abstract class Request implements Parcelable {
      *
      * @return
      */
-    public Executor getExecutable() {
-        return instanceExecutable();
+    public Executor getExecutor() {
+        return instanceExecutor();
     }
 
-    protected abstract Executor instanceExecutable();
+    protected abstract Executor instanceExecutor();
 
 
 }

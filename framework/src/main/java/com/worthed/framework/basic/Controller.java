@@ -63,10 +63,10 @@ public class Controller implements Callback, State {
         }
         //request.settesk
         if (task.isSyncTask()) {
-            request.getExecutable().run(context, this);
+            request.getExecutor().run(context, this);
             return;
         }
-        threadManager.addTask(request.getExecutable());
+        threadManager.addTask(request.getExecutor());
     }
 
     public void clearTask() {

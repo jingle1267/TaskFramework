@@ -12,6 +12,7 @@ import com.worthed.framework.Consumer;
 import com.worthed.framework.Response;
 import com.worthed.framework.Task;
 import com.worthed.framework.TaskServiceManager;
+import com.worthed.framework.test.servicetask.TestServiceRequest;
 import com.worthed.framework.test.task.TestRequest;
 
 import task.framework.worthed.com.taskframework.R;
@@ -65,11 +66,22 @@ public class MyActivity extends Activity implements Consumer {
     }
 
     public void testAsyncTask(View view) {
-        Log.d(TAG, "testAsyncTask");
+        Log.d(TAG, "testAsyncTask()");
         Task task = new Task();
         task.setFlag("testAsync");
         task.setSyncTask(false);
         TestRequest request = new TestRequest(task);
+        boolean isRegistSuccess = ClientTaskManager.instance().register(task, this);
+        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
+        TaskServiceManager.send(this, task, request);
+    }
+
+    public void testServiceTask(View view) {
+        Log.d(TAG, "testServiceTask()");
+        Task task = new Task();
+        task.setFlag("testService");
+        task.setSyncTask(false);
+        TestServiceRequest request = new TestServiceRequest(task);
         boolean isRegistSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
         TaskServiceManager.send(this, task, request);
