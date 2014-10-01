@@ -14,6 +14,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="8dip"
+        android:textSize="30sp"
+        android:textStyle="bold"
         android:text="Test" />
 
     <Button
@@ -39,5 +41,13 @@
         android:layout_height="wrap_content"
         android:onClick="clearTasks"
         android:text="clearTasks" />
+
+    <TextView
+        android:id="@+id/tv_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="8dip"
+        android:text="log ..." />
 
 </LinearLayout>

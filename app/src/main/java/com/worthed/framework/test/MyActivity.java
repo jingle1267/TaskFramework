@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.worthed.framework.ClientTaskManager;
 import com.worthed.framework.Consumer;
@@ -15,6 +16,8 @@ import com.worthed.framework.TaskServiceManager;
 import com.worthed.framework.test.servicetask.TestServiceRequest;
 import com.worthed.framework.test.task.TestRequest;
 
+import java.util.logging.Handler;
+
 import task.framework.worthed.com.taskframework.R;
 
 
@@ -22,13 +25,20 @@ public class MyActivity extends Activity implements Consumer {
 
     private final String TAG = getClass().getSimpleName();
 
+    private StringBuilder log;
+    private TextView logTextView;
+    private android.os.Handler handler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
         Log.w(TAG, "onCreate()");
         TaskServiceManager.start(this);
-
+        logTextView = (TextView) findViewById(R.id.tv_log);
+        log = new StringBuilder();
+        log.append("Log : \n");
+        handler = new android.os.Handler();
     }
 
     @Override
@@ -57,16 +67,20 @@ public class MyActivity extends Activity implements Consumer {
 
     public void testSyncTask(View view) {
         Log.d(TAG, "testSyncTask()");
+        String flag = "testSync";
         Task task = new Task();
-        task.setFlag("testSync");
+        task.setFlag(flag);
         TestRequest request = new TestRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
+        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess + "\n");
+        showLog();
         TaskServiceManager.send(this, task, request);
     }
 
     public void testAsyncTask(View view) {
         Log.d(TAG, "testAsyncTask()");
+        String flag = "testAsync";
         Task task = new Task();
         task.setFlag("testAsync");
         task.setSyncTask(false);
@@ -74,10 +88,13 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
+        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess + "\n");
+        showLog();
     }
 
     public void testServiceTask(View view) {
         Log.d(TAG, "testServiceTask()");
+        String flag = "serviceTask";
         Task task = new Task();
         task.setFlag("testService");
         task.setSyncTask(false);
@@ -85,11 +102,17 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
+        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess + "\n");
+        showLog();
     }
 
     public void clearTasks(View view) {
         Log.d(TAG, "testServiceTask()");
         TaskServiceManager.clearTaskable(this);
+        // log.append("testSyncTask()"  + "\n");
+        log.setLength(0);
+        log.append("Log ...");
+        showLog();
     }
 
     @Override
@@ -97,6 +120,18 @@ public class MyActivity extends Activity implements Consumer {
         Log.d(TAG, "consume()");
         Task task = response.getTask();
         Log.d(TAG, "consume() flag : " + task.getFlag());
+        log.append("consume() flag : " + task.getFlag() + "\n");
         ClientTaskManager.instance().unregister(task, this);
+        showLog();
     }
+
+    private void showLog() {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                logTextView.setText(log.toString());
+            }
+        });
+    }
+
 }
