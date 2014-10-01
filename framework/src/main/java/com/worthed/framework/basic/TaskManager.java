@@ -23,10 +23,13 @@ import com.worthed.framework.Response;
 import com.worthed.framework.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by jingle1267@163.com on 14-9-28.
@@ -36,15 +39,15 @@ public class TaskManager {
     private final boolean DEBUG = true;
     private final String TAG = getClass().getSimpleName();
 
-    protected ConcurrentHashMap<Task, List<Consumer>> consumers;
+    protected Map<Task, CopyOnWriteArrayList<Consumer>> consumers;
 
     public TaskManager() {
-        consumers = new ConcurrentHashMap<Task, List<Consumer>>();
+        consumers = new HashMap<Task, CopyOnWriteArrayList<Consumer>>();
     }
 
     public boolean register(Task task, Consumer consumer) {
         if (!consumers.containsKey(task)) {
-            consumers.put(task, new Vector<Consumer>());
+            consumers.put(task, new CopyOnWriteArrayList<Consumer>());
         } else {
             if (consumers.get(task).contains(consumer)) {
                 if (DEBUG) {

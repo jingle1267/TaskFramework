@@ -56,8 +56,8 @@ public class Controller implements Callback, State {
         }
         Task task = request.getTask();
         if (task.isSingleTask()) {
-            if (ClientTaskManager.instance().consumers.contains(task)
-                    || ServiceTaskManager.instance().consumers.contains(task)) {
+            if (ClientTaskManager.instance().consumers.containsKey(task)
+                    || ServiceTaskManager.instance().consumers.containsKey(task)) {
                 return;
             }
         }
