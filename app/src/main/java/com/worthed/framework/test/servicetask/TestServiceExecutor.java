@@ -57,8 +57,8 @@ public class TestServiceExecutor extends Executor implements Consumer{
         Log.d(TAG, "createTask() flag : " + taskFlag);
         Task task = new Task.Builder(taskFlag).setSync(false).setService(true).create();
         TestRequest request = new TestRequest(task);
-        boolean isRegistSuccess = ServiceTaskManager.instance().register(task, this);
-        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
+        boolean isRegisterSuccess = ServiceTaskManager.instance().register(task, this);
+        Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(context, task, request);
     }
 

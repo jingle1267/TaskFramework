@@ -47,7 +47,7 @@ public class ThreadManager {
             @Override
             public void run() {
                 state.start();
-                executor.run(context, callback);
+                executor.execute(context, callback);
                 state.end();
             }
         });

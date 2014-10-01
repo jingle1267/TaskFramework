@@ -24,6 +24,9 @@ import android.os.Parcelable;
  */
 public class Response implements Parcelable {
     public static final String FLAG_RESPONSE = "response_tag";
+
+    private boolean isReadFromCache = false;
+
     public static final Creator<Response> CREATOR = new Creator<Response>() {
         @Override
         public Response createFromParcel(Parcel parcel) {
@@ -62,9 +65,22 @@ public class Response implements Parcelable {
         return errorMsg;
     }
 
+    public void setReadFromCache(boolean isReadFromCache) {
+        this.isReadFromCache = isReadFromCache;
+    }
+
+    /**
+     * 获取数据是否来自缓存
+     * @return
+     */
+    public boolean isReadFromCache() {
+        return isReadFromCache;
+    }
+
     public Response(Parcel source) {
         this.errorCode = source.readString();
         this.errorMsg = source.readString();
+        this.isReadFromCache = source.readInt() == 0 ? false : true;
         this.task = source.readParcelable(Task.class.getClassLoader());
     }
 
@@ -72,6 +88,7 @@ public class Response implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.errorCode);
         parcel.writeString(this.errorMsg);
+        parcel.writeInt(this.isReadFromCache ? 1 : 0);
         parcel.writeParcelable(this.task, i);
     }
 

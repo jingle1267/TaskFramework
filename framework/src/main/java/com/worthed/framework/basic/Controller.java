@@ -67,7 +67,7 @@ public class Controller implements Callback, State {
         }
         //request.settesk
         if (task.isSyncTask()) {
-            request.getExecutor().run(context, this);
+            request.getExecutor().execute(context, this);
             return;
         }
         threadManager.addTask(request.getExecutor());

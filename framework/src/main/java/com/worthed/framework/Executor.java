@@ -16,12 +16,19 @@
 
 package com.worthed.framework;
 
-import com.worthed.framework.basic.TaskRunnable;
+import android.content.Context;
+import android.util.Log;
+
+import com.worthed.framework.basic.Callback;
 
 /**
+ * 任务执行器，处理耗时操作和缓存
  * Created by jingle1267@163.com on 14-9-28.
  */
-public abstract class Executor implements TaskRunnable {
+public abstract class Executor {
+
+    private final boolean DEBUG = true;
+    private final String TAG = getClass().getSimpleName();
 
     protected Request request;
     protected Task task;
@@ -29,6 +36,60 @@ public abstract class Executor implements TaskRunnable {
     protected Executor(Task task, Request request) {
         this.task = task;
         this.request = request;
+    }
+
+    /**
+     * 执行请求
+     * @param context
+     * @param callback
+     */
+    public void execute(Context context, Callback callback) {
+        Response response;
+        if (task.isReadCache()) {
+            response = readCache();
+            response.setReadFromCache(true);
+            callback.callback(response);
+        }
+
+        response = this.run(context, callback);
+
+        if (response != null) {
+            response.setReadFromCache(false);
+            if (task.isSaveCache()) {
+                saveCache(response);
+            }
+        }
+    }
+
+    /**
+     * 执行耗时操作
+     * @param context
+     * @param callback
+     * @return
+     */
+    public abstract Response run(Context context, Callback callback);
+
+    /**
+     * 读取缓存
+     * @return
+     */
+    public Response readCache() {
+        if (DEBUG) {
+            Log.d(TAG, "readCache()");
+        }
+        // 以下需要实现读取缓存
+        return null;
+    }
+
+    /**
+     * 写缓存
+     * @param response
+     */
+    public void saveCache(Response response) {
+        // 需要处理保存出错情况
+        if (DEBUG) {
+            Log.d(TAG, "saveCache()");
+        }
     }
 
     public Task getTask() {
