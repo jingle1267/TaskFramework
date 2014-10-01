@@ -17,6 +17,7 @@
 package com.worthed.framework.basic;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 
 import com.worthed.framework.ClientTaskManager;
@@ -36,8 +37,11 @@ public class Controller implements Callback, State {
     private final String TAG = getClass().getSimpleName();
     private ThreadManager threadManager;
 
+    private Handler handler;
+
     private Controller(Context context) {
         Controller.context = context;
+        handler = new Handler();
         threadManager = new ThreadManager(context, this, this);
     }
 
@@ -78,14 +82,20 @@ public class Controller implements Callback, State {
     }
 
     @Override
-    public void callback(Response response) {
+    public void callback(final Response response) {
         if (DEBUG) {
             Log.d(TAG, "callback()");
         }
         if (response.getTask().isServiceTask()) {
             ServiceTaskManager.instance().consume(response);
         } else {
-            ClientTaskManager.instance().consume(response);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    ClientTaskManager.instance().consume(response);
+                }
+            });
+//            ClientTaskManager.instance().consume(response);
 //            Intent intent = new Intent();
 //            intent.putExtra(Requestable.FLAG_REQUST, response);
 //            context.sendBroadcast(intent);

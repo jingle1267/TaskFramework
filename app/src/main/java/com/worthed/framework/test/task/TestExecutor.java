@@ -36,11 +36,13 @@ public class TestExecutor extends Executor {
 
     @Override
     public Response run(Context context, Callback callback) {
-        Log.d("TestExecutor", "run() falg : " + task.getFlag());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        Log.d("TestExecutor", "run() falg - threadName : " + task.getFlag() + " - " + Thread.currentThread().getName());
+        if (!task.isSyncTask()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         TestResponse response = new TestResponse(task);
         callback.callback(response);

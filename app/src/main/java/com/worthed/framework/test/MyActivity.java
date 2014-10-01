@@ -102,7 +102,8 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
-        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess + "\n");
+        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess
+                + "\n");
         showLog();
     }
 
@@ -111,7 +112,7 @@ public class MyActivity extends Activity implements Consumer {
         TaskServiceManager.clearTaskable(this);
         // log.append("testSyncTask()"  + "\n");
         log.setLength(0);
-        log.append("Log ...");
+        log.append("Log :\n");
         showLog();
     }
 
@@ -119,7 +120,7 @@ public class MyActivity extends Activity implements Consumer {
     public void consume(Response response) {
         Log.d(TAG, "consume()");
         Task task = response.getTask();
-        Log.d(TAG, "consume() flag : " + task.getFlag());
+        Log.d(TAG, "consume() flag - threadName: " + task.getFlag() + " - " + Thread.currentThread().getName());
         log.append("consume() flag : " + task.getFlag() + "\n");
         ClientTaskManager.instance().unregister(task, this);
         showLog();
