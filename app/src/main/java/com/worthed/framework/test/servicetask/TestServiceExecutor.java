@@ -55,10 +55,7 @@ public class TestServiceExecutor extends Executor implements Consumer{
 
     public void createTask(String taskFlag) {
         Log.d(TAG, "createTask() flag : " + taskFlag);
-        Task task = new Task();
-        task.setFlag(taskFlag);
-        task.setSyncTask(false);
-        task.setServiceTask(true); // 设置为服务任务 此任务可以在注册事件里面设置
+        Task task = new Task.Builder(taskFlag).setSync(false).setService(true).create();
         TestRequest request = new TestRequest(task);
         boolean isRegistSuccess = ServiceTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);

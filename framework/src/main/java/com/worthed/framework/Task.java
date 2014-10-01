@@ -63,8 +63,8 @@ public class Task implements Parcelable {
      */
     protected boolean saveCache = false;
 
-    public Task() {
-
+    public Task(String flag) {
+        this.flag = flag;
     }
 
     public Task(Parcel source) {
@@ -158,8 +158,43 @@ public class Task implements Parcelable {
         return flag;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public static class Builder{
+
+        private Task task;
+
+        public Builder(String flag) {
+            task = new Task(flag);
+        }
+
+        public Builder setSync(boolean isSync) {
+            task.setSyncTask(isSync);
+            return this;
+        }
+
+        public Builder setSingle(boolean isSingle) {
+            task.setSingleTask(isSingle);
+            return this;
+        }
+
+        public Builder setService(boolean isService) {
+            task.setServiceTask(isService);
+            return this;
+        }
+
+        public Builder setReadCache(boolean isReadCache) {
+            task.setReadCache(isReadCache);
+            return this;
+        }
+
+        public Builder setSaveCache(boolean isSaveCache) {
+            task.setSaveCache(isSaveCache);
+            return this;
+        }
+
+        public Task create() {
+            return task;
+        }
+
     }
 
 }

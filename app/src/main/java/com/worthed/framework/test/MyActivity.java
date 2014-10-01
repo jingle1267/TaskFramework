@@ -68,8 +68,7 @@ public class MyActivity extends Activity implements Consumer {
     public void testSyncTask(View view) {
         Log.d(TAG, "testSyncTask()");
         String flag = "testSync";
-        Task task = new Task();
-        task.setFlag(flag);
+        Task task = new Task.Builder(flag).create();
         TestRequest request = new TestRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
@@ -81,9 +80,7 @@ public class MyActivity extends Activity implements Consumer {
     public void testAsyncTask(View view) {
         Log.d(TAG, "testAsyncTask()");
         String flag = "testAsync";
-        Task task = new Task();
-        task.setFlag("testAsync");
-        task.setSyncTask(false);
+        Task task = new Task.Builder(flag).setSync(false).create();
         TestRequest request = new TestRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
@@ -95,9 +92,7 @@ public class MyActivity extends Activity implements Consumer {
     public void testServiceTask(View view) {
         Log.d(TAG, "testServiceTask()");
         String flag = "serviceTask";
-        Task task = new Task();
-        task.setFlag("testService");
-        task.setSyncTask(false);
+        Task task = new Task.Builder(flag).setSync(false).create();
         TestServiceRequest request = new TestServiceRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
