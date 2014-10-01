@@ -34,4 +34,10 @@
         android:onClick="testServiceTask"
         android:text="testServiceTask" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="clearTasks"
+        android:text="clearTasks" />
+
 </LinearLayout>

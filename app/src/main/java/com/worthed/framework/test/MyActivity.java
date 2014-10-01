@@ -57,12 +57,12 @@ public class MyActivity extends Activity implements Consumer {
 
     public void testSyncTask(View view) {
         Log.d(TAG, "testSyncTask()");
-        Task taskable = new Task();
-        taskable.setFlag("testSync");
-        TestRequest request = new TestRequest(taskable);
-        boolean isRegistSuccess = ClientTaskManager.instance().register(taskable, this);
-        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
-        TaskServiceManager.send(this, taskable, request);
+        Task task = new Task();
+        task.setFlag("testSync");
+        TestRequest request = new TestRequest(task);
+        boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
+        Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
+        TaskServiceManager.send(this, task, request);
     }
 
     public void testAsyncTask(View view) {
@@ -71,8 +71,8 @@ public class MyActivity extends Activity implements Consumer {
         task.setFlag("testAsync");
         task.setSyncTask(false);
         TestRequest request = new TestRequest(task);
-        boolean isRegistSuccess = ClientTaskManager.instance().register(task, this);
-        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
+        boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
+        Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
     }
 
@@ -82,9 +82,14 @@ public class MyActivity extends Activity implements Consumer {
         task.setFlag("testService");
         task.setSyncTask(false);
         TestServiceRequest request = new TestServiceRequest(task);
-        boolean isRegistSuccess = ClientTaskManager.instance().register(task, this);
-        Log.d(TAG, "isRegistSuccess : " + isRegistSuccess);
+        boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
+        Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
+    }
+
+    public void clearTasks(View view) {
+        Log.d(TAG, "testServiceTask()");
+        TaskServiceManager.clearTaskable(this);
     }
 
     @Override
