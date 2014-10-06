@@ -1,7 +1,7 @@
 TaskFramework
 =============
 
-Android task framework. Less code, better quality. 
+Android task framework. **Less code, better quality.** 
 
 TaskFramework is an event bus designed to decouple different parts of your application
 while still allowing them to communicate efficiently.
