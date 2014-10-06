@@ -25,6 +25,13 @@ boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
 TaskServiceManager.send(this, task, request);
 ```
 
+Author
+------
+| [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://worthed.com "Visit worthed.com") |
+|---|
+| [WORTHED.COM](http://worthed.com) |
+
+
 License
 -------
 
