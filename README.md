@@ -6,7 +6,7 @@ Android task framework.
 License
 -------
 
-  Copyright 2014 zhenguo (jingle1267@163.com)
+  Copyright (C) 2014 [zhenguo][1] (jingle1267@163.com)
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -20,4 +20,4 @@ License
   See the License for the specific language governing permissions and
   limitations under the License.
  
-
+[1]: http://worthed.com
