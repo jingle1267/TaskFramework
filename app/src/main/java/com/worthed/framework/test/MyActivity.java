@@ -104,7 +104,6 @@ public class MyActivity extends Activity implements Consumer {
     public void clearTasks(View view) {
         Log.d(TAG, "testServiceTask()");
         TaskServiceManager.clearTasks(this);
-        // log.append("testSyncTask()"  + "\n");
         log.setLength(0);
         log.append("Log :\n");
         showLog();
