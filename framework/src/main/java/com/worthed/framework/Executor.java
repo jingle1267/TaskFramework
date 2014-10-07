@@ -45,6 +45,7 @@ public abstract class Executor {
      */
     public void execute(Context context, Callback callback) {
         Response response;
+        // 读取缓存数据
         if (task.isReadCache()) {
             response = readCache();
             response.setReadFromCache(true);
@@ -53,6 +54,7 @@ public abstract class Executor {
 
         response = this.run(context, callback);
 
+        // 保存缓存数据
         if (response != null) {
             response.setReadFromCache(false);
             if (task.isSaveCache()) {

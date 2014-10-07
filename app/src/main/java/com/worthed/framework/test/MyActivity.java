@@ -2,7 +2,6 @@ package com.worthed.framework.test;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.method.MovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
