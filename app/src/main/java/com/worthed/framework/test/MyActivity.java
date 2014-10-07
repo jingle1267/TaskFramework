@@ -2,6 +2,8 @@ package com.worthed.framework.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.MovementMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +36,7 @@ public class MyActivity extends Activity implements Consumer {
         Log.w(TAG, "onCreate()");
         TaskServiceManager.start(this);
         logTextView = (TextView) findViewById(R.id.tv_log);
+        logTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
         log = new StringBuilder();
         log.append("Log : \n");
         handler = new android.os.Handler();
@@ -70,7 +73,7 @@ public class MyActivity extends Activity implements Consumer {
         TestRequest request = new TestRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
-        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess + "\n");
+        log.append("testSyncTask() flag : " + flag + "\n");
         showLog();
         TaskServiceManager.send(this, task, request);
     }
@@ -83,7 +86,7 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
-        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess + "\n");
+        log.append("testSyncTask() flag : " + flag + "\n");
         showLog();
     }
 
@@ -95,8 +98,7 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
-        log.append("testSyncTask() flag - isRegisterSuccess : " + flag + " - " + isRegisterSuccess
-                + "\n");
+        log.append("testSyncTask() flag : " + flag + "\n");
         showLog();
     }
 
