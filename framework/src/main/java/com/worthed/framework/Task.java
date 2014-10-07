@@ -21,11 +21,10 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 
 /**
+ * 任务标识 设置任务的属性，主要包括：标识（flag）、单例（single）、同步（sync）、复合（service）、读缓存（readCache）、写缓存（writeCache）。
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class Task implements Parcelable {
-
-    // public final static String FLAG_TASK = "task_tag";
 
     public static final Creator<Task> CREATOR = new Creator<Task>() {
         @Override
@@ -45,15 +44,15 @@ public class Task implements Parcelable {
     /**
      * 是否是单任务,如果是,在任务控制器里会判断该任务是否在任务队列里存在 如果存在则不执行
      */
-    protected boolean singleTask = false;
+    protected boolean single = false;
     /**
      * 标识任务是否同步
      */
-    protected boolean syncTask = true;
+    protected boolean sync = true;
     /**
      * 标识任务是否是复合任务
      */
-    protected boolean serviceTask = false;
+    protected boolean service = false;
     /**
      * 是否读取本地缓存数据
      */
@@ -69,9 +68,9 @@ public class Task implements Parcelable {
 
     public Task(Parcel source) {
         this.flag = source.readString();
-        this.singleTask = source.readInt() == 0 ? false : true;
-        this.syncTask = source.readInt() == 0 ? false : true;
-        this.serviceTask = source.readInt() == 0 ? false : true;
+        this.single = source.readInt() == 0 ? false : true;
+        this.sync = source.readInt() == 0 ? false : true;
+        this.service = source.readInt() == 0 ? false : true;
         this.readCache = source.readInt() == 0 ? false : true;
         this.saveCache = source.readInt() == 0 ? false : true;
     }
@@ -79,9 +78,9 @@ public class Task implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int i) {
         dest.writeString(this.flag);
-        dest.writeInt(this.singleTask ? 1 : 0);
-        dest.writeInt(this.syncTask ? 1 : 0);
-        dest.writeInt(this.serviceTask ? 1 : 0);
+        dest.writeInt(this.single ? 1 : 0);
+        dest.writeInt(this.sync ? 1 : 0);
+        dest.writeInt(this.service ? 1 : 0);
         dest.writeInt(this.readCache ? 1 : 0);
         dest.writeInt(this.saveCache ? 1 : 0);
     }
@@ -114,28 +113,28 @@ public class Task implements Parcelable {
         return (TextUtils.isEmpty(this.flag) ? "" : this.flag).hashCode();
     }
 
-    public boolean isSingleTask() {
-        return singleTask;
+    public boolean isSingle() {
+        return single;
     }
 
-    public void setSingleTask(boolean singleTask) {
-        this.singleTask = singleTask;
+    public void setSingle(boolean single) {
+        this.single = single;
     }
 
-    public boolean isSyncTask() {
-        return syncTask;
+    public boolean isSync() {
+        return sync;
     }
 
-    public void setSyncTask(boolean syncTask) {
-        this.syncTask = syncTask;
+    public void setSync(boolean sync) {
+        this.sync = sync;
     }
 
-    public boolean isServiceTask() {
-        return serviceTask;
+    public boolean isService() {
+        return service;
     }
 
-    public void setServiceTask(boolean serviceTask) {
-        this.serviceTask = serviceTask;
+    public void setService(boolean service) {
+        this.service = service;
     }
 
     public boolean isReadCache() {
@@ -158,6 +157,9 @@ public class Task implements Parcelable {
         return flag;
     }
 
+    /**
+     * Task创建者
+     */
     public static class Builder{
 
         private Task task;
@@ -166,31 +168,60 @@ public class Task implements Parcelable {
             task = new Task(flag);
         }
 
+        /**
+         * 设置是否同步
+         * @param isSync
+         * @return
+         */
         public Builder setSync(boolean isSync) {
-            task.setSyncTask(isSync);
+            task.setSync(isSync);
             return this;
         }
 
+        /**
+         * 设置是否单例任务
+         * @param isSingle
+         * @return
+         */
         public Builder setSingle(boolean isSingle) {
-            task.setSingleTask(isSingle);
+            task.setSingle(isSingle);
             return this;
         }
 
+        /**
+         * 设置是否是复合任务
+         * @param isService
+         * @return
+         */
         public Builder setService(boolean isService) {
-            task.setServiceTask(isService);
+            task.setService(isService);
             return this;
         }
 
+        /**
+         * 设置是否读缓存
+         * @param isReadCache
+         * @return
+         */
         public Builder setReadCache(boolean isReadCache) {
             task.setReadCache(isReadCache);
             return this;
         }
 
+        /**
+         * 设置是否保存缓存
+         * @param isSaveCache
+         * @return
+         */
         public Builder setSaveCache(boolean isSaveCache) {
             task.setSaveCache(isSaveCache);
             return this;
         }
 
+        /**
+         * 创建Task
+         * @return
+         */
         public Task create() {
             return task;
         }

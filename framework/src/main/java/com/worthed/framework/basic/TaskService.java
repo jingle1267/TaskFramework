@@ -24,6 +24,7 @@ import android.util.Log;
 import com.worthed.framework.Request;
 
 /**
+ * 任务处理服务
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskService extends Service {

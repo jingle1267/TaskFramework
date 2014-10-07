@@ -17,10 +17,15 @@
 package com.worthed.framework;
 
 /**
+ * 回调接口
  * Created by jingle1267@163.com on 14-9-28.
  */
 public interface Consumer {
 
+    /**
+     * 回调方法
+     * @param response
+     */
     public void consume(Response response);
 
 }

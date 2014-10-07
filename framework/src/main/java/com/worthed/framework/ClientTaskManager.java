@@ -19,6 +19,7 @@ package com.worthed.framework;
 import com.worthed.framework.basic.TaskManager;
 
 /**
+ * 前端任务管理器
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class ClientTaskManager extends TaskManager {

@@ -16,8 +16,6 @@ import com.worthed.framework.TaskServiceManager;
 import com.worthed.framework.test.servicetask.TestServiceRequest;
 import com.worthed.framework.test.task.TestRequest;
 
-import java.util.logging.Handler;
-
 import task.framework.worthed.com.taskframework.R;
 
 
@@ -91,7 +89,7 @@ public class MyActivity extends Activity implements Consumer {
 
     public void testServiceTask(View view) {
         Log.d(TAG, "testServiceTask()");
-        String flag = "serviceTask";
+        String flag = "serviceTag";
         Task task = new Task.Builder(flag).setSync(false).create();
         TestServiceRequest request = new TestServiceRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
@@ -104,7 +102,7 @@ public class MyActivity extends Activity implements Consumer {
 
     public void clearTasks(View view) {
         Log.d(TAG, "testServiceTask()");
-        TaskServiceManager.clearTaskable(this);
+        TaskServiceManager.clearTasks(this);
         // log.append("testSyncTask()"  + "\n");
         log.setLength(0);
         log.append("Log :\n");

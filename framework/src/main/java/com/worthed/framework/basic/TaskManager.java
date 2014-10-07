@@ -32,6 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
+ * 任务管理工具类
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskManager {
@@ -45,6 +46,12 @@ public class TaskManager {
         consumers = new HashMap<Task, CopyOnWriteArrayList<Consumer>>();
     }
 
+    /**
+     * 注册任务
+     * @param task
+     * @param consumer
+     * @return
+     */
     public boolean register(Task task, Consumer consumer) {
         if (!consumers.containsKey(task)) {
             consumers.put(task, new CopyOnWriteArrayList<Consumer>());
@@ -63,6 +70,12 @@ public class TaskManager {
         return true;
     }
 
+    /**
+     * 解除注册
+     * @param task
+     * @param consumer
+     * @return
+     */
     public boolean unregister(Task task, Consumer consumer) {
         if (!consumers.containsKey(task)) {
             return false;
@@ -76,6 +89,10 @@ public class TaskManager {
         return true;
     }
 
+    /**
+     * 消费任务
+     * @param response
+     */
     public void consume(Response response) {
         if (DEBUG) {
             Log.d(TAG, "consume()");
@@ -104,6 +121,10 @@ public class TaskManager {
         }
     }
 
+    /**
+     * 取消消费者
+     * @param consumer
+     */
     public void removeConsumer(Consumer consumer) {
         Iterator<Task> it = this.consumers.keySet().iterator();
         Task task;
@@ -124,6 +145,9 @@ public class TaskManager {
         }
     }
 
+    /**
+     * 清楚所有的消费者
+     */
     public void clearConsumer() {
         if (this.consumers == null) {
             return;

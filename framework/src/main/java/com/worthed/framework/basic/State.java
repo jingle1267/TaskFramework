@@ -17,14 +17,24 @@
 package com.worthed.framework.basic;
 
 /**
+ * 任务状态
  * Created by jingle1267@163.com on 14-9-28.
  */
 public interface State {
 
+    /**
+     * 任务开始
+     */
     public void start();
 
+    /**
+     * 任务完成
+     */
     public void end();
 
+    /**
+     * 清除任务
+     */
     public void clear();
 
 }

@@ -37,7 +37,7 @@ public class TestExecutor extends Executor {
     @Override
     public Response run(Context context, Callback callback) {
         Log.d("TestExecutor", "run() falg - threadName : " + task.getFlag() + " - " + Thread.currentThread().getName());
-        if (!task.isSyncTask()) {
+        if (!task.isSync()) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {

@@ -23,6 +23,7 @@ import android.util.Log;
 import com.worthed.framework.basic.TaskService;
 
 /**
+ * TaskService管理类
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class TaskServiceManager {
@@ -64,16 +65,16 @@ public class TaskServiceManager {
             return;
         }
         Intent intent = new Intent(context, TaskService.class);
-        // Bundle bundle = new Bundle();
-        // bundle.putParcelable(Taskable.FLAG_TASK, task);
         request.task = task;
-        // bundle.putParcelable(Requestable.FLAG_REQUST, request);
-        // intent.putExtras(bundle);
         intent.putExtra(Request.FLAG_REQUST, request);
         context.startService(intent);
     }
 
-    public static void clearTaskable(Context context) {
+    /**
+     * 清空任务
+     * @param context
+     */
+    public static void clearTasks(Context context) {
         Intent intent = new Intent(context, TaskService.class);
         intent.putExtra(TaskService.FLAG_TASK_CLEAR, true);
         context.startService(intent);

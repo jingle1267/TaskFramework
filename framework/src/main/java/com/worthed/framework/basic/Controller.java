@@ -59,14 +59,13 @@ public class Controller implements Callback, State {
             Log.d(TAG, "control()");
         }
         Task task = request.getTask();
-        if (task.isSingleTask()) {
+        if (task.isSingle()) {
             if (ClientTaskManager.instance().consumers.containsKey(task)
                     || ServiceTaskManager.instance().consumers.containsKey(task)) {
                 return;
             }
         }
-        //request.settesk
-        if (task.isSyncTask()) {
+        if (task.isSync()) {
             request.getExecutor().execute(context, this);
             return;
         }
@@ -86,7 +85,7 @@ public class Controller implements Callback, State {
         if (DEBUG) {
             Log.d(TAG, "callback()");
         }
-        if (response.getTask().isServiceTask()) {
+        if (response.getTask().isService()) {
             ServiceTaskManager.instance().consume(response);
         } else {
             handler.post(new Runnable() {
@@ -95,10 +94,6 @@ public class Controller implements Callback, State {
                     ClientTaskManager.instance().consume(response);
                 }
             });
-//            ClientTaskManager.instance().consume(response);
-//            Intent intent = new Intent();
-//            intent.putExtra(Requestable.FLAG_REQUST, response);
-//            context.sendBroadcast(intent);
         }
     }
 

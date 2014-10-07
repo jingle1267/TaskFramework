@@ -20,6 +20,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ * 任务请求
  * Created by jingle1267@163.com on 14-9-28.
  */
 public abstract class Request implements Parcelable {
@@ -54,6 +55,10 @@ public abstract class Request implements Parcelable {
         return instanceExecutor();
     }
 
+    /**
+     * 初始化任务执行器 此处确定使用哪个处理器来完成任务
+     * @return
+     */
     protected abstract Executor instanceExecutor();
 
 

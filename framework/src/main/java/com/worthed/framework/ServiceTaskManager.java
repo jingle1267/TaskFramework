@@ -17,6 +17,7 @@
 package com.worthed.framework;
 
 /**
+ * 后台任务管理器（异步任务管理器）
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class ServiceTaskManager {

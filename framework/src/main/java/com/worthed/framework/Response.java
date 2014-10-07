@@ -20,6 +20,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ * 任务回调
  * Created by jingle1267@163.com on 14-9-28.
  */
 public class Response implements Parcelable {
