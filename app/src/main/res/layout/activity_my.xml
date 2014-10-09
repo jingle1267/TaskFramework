@@ -13,34 +13,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:padding="8dip"
+        android:padding="2dip"
         android:textSize="30sp"
-        android:textStyle="bold"
+        android:textStyle="normal|italic|bold"
+        android:shadowDx="4.0"
+        android:shadowDy="2.0"
+        android:shadowRadius="2.0"
+        android:shadowColor="@android:color/darker_gray"
         android:text="Test" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="testSyncTask"
-        android:text="testSyncTask" />
+        android:text="test sync task" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="testAsyncTask"
-        android:text="testAsyncTask" />
+        android:text="test async task" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="testServiceTask"
-        android:text="testServiceTask" />
+        android:text="test service task" />
 
-    <Button
+    <LinearLayout
+        android:orientation="horizontal"
+        android:weightSum="2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="clearTasks"
-        android:text="clearTasks" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:onClick="unregisterTasks"
+            android:text="unregist tasks" />
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clearTasks"
+            android:text="clear tasks" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_log"

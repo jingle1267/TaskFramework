@@ -72,7 +72,7 @@ public class MyActivity extends Activity implements Consumer {
         TestRequest request = new TestRequest(task);
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
-        log.append("testSyncTask() flag : " + flag + "\n");
+        log.append("* request() flag : " + flag + "\n");
         showLog();
         TaskServiceManager.send(this, task, request);
     }
@@ -85,7 +85,7 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
-        log.append("testSyncTask() flag : " + flag + "\n");
+        log.append("* request() flag : " + flag + "\n");
         showLog();
     }
 
@@ -97,14 +97,22 @@ public class MyActivity extends Activity implements Consumer {
         boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
         Log.d(TAG, "isRegisterSuccess : " + isRegisterSuccess);
         TaskServiceManager.send(this, task, request);
-        log.append("testSyncTask() flag : " + flag + "\n");
+        log.append("* request() flag : " + flag + "\n");
+        showLog();
+    }
+
+    public void unregisterTasks(View view) {
+        Log.d(TAG, "unregisterTasks()");
+        log.append("* unregister tasks " + "\n");
+        ClientTaskManager.instance().clearAllConsumers();
         showLog();
     }
 
     public void clearTasks(View view) {
         Log.d(TAG, "testServiceTask()");
         TaskServiceManager.clearTasks(this);
-        log.setLength(0);
+        // log.setLength(0);
+        log.append("\n============================= \n");
         log.append("Log :\n");
         showLog();
     }
@@ -114,7 +122,7 @@ public class MyActivity extends Activity implements Consumer {
         Log.d(TAG, "consume()");
         Task task = response.getTask();
         Log.d(TAG, "consume() flag - threadName: " + task.getFlag() + " - " + Thread.currentThread().getName());
-        log.append("consume() flag : " + task.getFlag() + "\n");
+        log.append("# consume() flag : " + task.getFlag() + "\n");
         ClientTaskManager.instance().unregister(task, this);
         showLog();
     }

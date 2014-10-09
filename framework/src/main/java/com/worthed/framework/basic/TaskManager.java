@@ -23,11 +23,8 @@ import com.worthed.framework.Response;
 import com.worthed.framework.Task;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -40,14 +37,15 @@ public class TaskManager {
     private final boolean DEBUG = true;
     private final String TAG = getClass().getSimpleName();
 
-    protected Map<Task, CopyOnWriteArrayList<Consumer>> consumers;
+    protected ConcurrentHashMap<Task, CopyOnWriteArrayList<Consumer>> consumers;
 
     public TaskManager() {
-        consumers = new HashMap<Task, CopyOnWriteArrayList<Consumer>>();
+        consumers = new ConcurrentHashMap<Task, CopyOnWriteArrayList<Consumer>>();
     }
 
     /**
      * 注册任务
+     *
      * @param task
      * @param consumer
      * @return
@@ -72,12 +70,16 @@ public class TaskManager {
 
     /**
      * 解除注册
+     *
      * @param task
      * @param consumer
      * @return
      */
     public boolean unregister(Task task, Consumer consumer) {
         if (!consumers.containsKey(task)) {
+            return false;
+        }
+        if (consumers.get(task) == null) {
             return false;
         }
         if (consumers.get(task).contains(consumer)) {
@@ -91,6 +93,7 @@ public class TaskManager {
 
     /**
      * 消费任务
+     *
      * @param response
      */
     public void consume(Response response) {
@@ -123,6 +126,7 @@ public class TaskManager {
 
     /**
      * 取消消费者
+     *
      * @param consumer
      */
     public void removeConsumer(Consumer consumer) {
@@ -148,25 +152,30 @@ public class TaskManager {
     /**
      * 清楚所有的消费者
      */
-    public void clearConsumer() {
+    public void clearAllConsumers() {
         if (this.consumers == null) {
             return;
+        } else {
+            this.consumers.clear();
         }
-        Iterator<Task> it = this.consumers.keySet().iterator();
-        Task task;
-        List<Consumer> consumers;
-        while (it.hasNext()) {
-            task = it.next();
-            consumers = this.consumers.get(task);
-            if (consumers == null || consumers.isEmpty()) {
-                this.consumers.remove(task);
-                continue;
-            }
-            consumers.clear();
-            if (consumers.isEmpty()) {
-                this.consumers.remove(task);
-            }
-        }
+
+//        Iterator<Task> it = this.consumers.keySet().iterator();
+//        Task task;
+//        List<Consumer> consumers;
+//        while (it.hasNext()) {
+//            task = it.next();
+//            this.consumers.remove(task);
+//
+//            consumers = this.consumers.get(task);
+//            if (consumers == null || consumers.isEmpty()) {
+//                this.consumers.remove(task);
+//                continue;
+//            }
+//            consumers.clear();
+//            if (consumers.isEmpty()) {
+//                this.consumers.remove(task);
+//            }
+//        }
 
     }
 }
