@@ -26,12 +26,6 @@ TaskServiceManager.send(this, task, request);
 Please see the [issues][7] section to
 report any bugs or feature requests and to see the list of known issues.
 
-Author
-------
-| [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://worthed.com "Visit worthed.com") |
-|---|
-| [WORTHED.COM][5] |
-
 Contributing
 ------------
 
@@ -41,6 +35,19 @@ Please fork this repository and contribute back using
 Any contributions, large or small, major features, bug fixes, additional
 language translations are welcomed and appreciated
 but will be thoroughly reviewed and discussed.
+
+Alternative libraries
+---------------------
+
+ * [EventBus][https://github.com/greenrobot/EventBus]
+ * [otto][https://github.com/square/otto]
+ * [Volley][https://android.googlesource.com/platform/frameworks/volley/]
+
+Author
+------
+| [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://worthed.com "Visit worthed.com") |
+|---|
+| [WORTHED.COM][5] |
 
 License
 -------
