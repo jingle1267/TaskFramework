@@ -39,9 +39,9 @@ but will be thoroughly reviewed and discussed.
 Alternative libraries
 ---------------------
 
- * [EventBus][https://github.com/greenrobot/EventBus]
- * [otto][https://github.com/square/otto]
- * [Volley][https://android.googlesource.com/platform/frameworks/volley/]
+ * [EventBus][8]
+ * [otto][9]
+ * [Volley][10]
 
 Author
 ------
@@ -73,3 +73,6 @@ License
 [5]: http://worthed.com
 [6]: https://github.com/jingle1267/TaskFramework/pulls
 [7]: https://github.com/jingle1267/TaskFramework/issues
+[8]: https://github.com/greenrobot/EventBus
+[9]: https://github.com/square/otto
+[10]: https://android.googlesource.com/platform/frameworks/volley/
