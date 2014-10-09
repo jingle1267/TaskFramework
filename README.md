@@ -25,6 +25,9 @@ boolean isRegisterSuccess = ClientTaskManager.instance().register(task, this);
 TaskServiceManager.send(this, task, request);
 ```
 
+Please see the [issues][7] section to
+report any bugs or feature requests and to see the list of known issues.
+
 Author
 ------
 | [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://worthed.com "Visit worthed.com") |
@@ -64,3 +67,4 @@ License
 [4]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Executor.java
 [5]: http://worthed.com
 [6]: https://github.com/jingle1267/TaskFramework/pulls
+[7]: https://github.com/jingle1267/TaskFramework/issues
