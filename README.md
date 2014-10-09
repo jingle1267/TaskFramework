@@ -1,11 +1,9 @@
 TaskFramework
 =============
 
-Android task framework. **<font color="red">Less code, better quality!</font>**
-
-TaskFramework is an event bus designed to decouple different parts of your application
-while still allowing them to communicate efficiently.
-
+TaskFramework is an Open Source Android library that allows developers to easily create applications. TaskFramework is an event bus designed to decouple different parts of your application
+while still allowing them to communicate efficiently. Feel free 
+to use it all you want in your Android apps provided that you cite this project and include the license in your app. **<font color="red">Less code, better quality!</font>**
 
 General Usage and API
 ---------------------
@@ -17,7 +15,7 @@ Using TaskFramework takes four simple steps:<br/>
 3. Extend [<code>Response.class</code>][3];<br/>
 4. Implement [<code>Executor.class</code>][4];<br/>
 5. Create a task:<br/>
-```
+```java
 String flag = "testAsync";
 Task task = new Task.Builder(flag).setSync(false).create();
 TestRequest request = new TestRequest(task);
