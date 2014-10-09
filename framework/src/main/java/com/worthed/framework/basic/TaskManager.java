@@ -76,7 +76,7 @@ public class TaskManager {
      * @return
      */
     public boolean unregister(Task task, Consumer consumer) {
-        if (!consumers.containsKey(task)) {
+        if (!consumers.containsKey(task) || consumer == null) {
             return false;
         }
         if (consumers.get(task) == null) {
