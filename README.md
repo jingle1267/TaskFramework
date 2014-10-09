@@ -1,7 +1,7 @@
 TaskFramework
 =============
 
-Android task framework. **Less code, better quality.** 
+Android task framework. **<font color="red">Less code, better quality!</font>**
 
 TaskFramework is an event bus designed to decouple different parts of your application
 while still allowing them to communicate efficiently.
@@ -31,6 +31,15 @@ Author
 |---|
 | [WORTHED.COM][5] |
 
+Contributing
+------------
+
+Please fork this repository and contribute back using
+[pull requests][6].
+
+Any contributions, large or small, major features, bug fixes, additional
+language translations are welcomed and appreciated
+but will be thoroughly reviewed and discussed.
 
 License
 -------
@@ -54,3 +63,4 @@ License
 [3]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Response.java
 [4]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Executor.java
 [5]: http://worthed.com
+[6]: https://github.com/jingle1267/TaskFramework/pulls
