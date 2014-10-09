@@ -1,7 +1,7 @@
 TaskFramework
 =============
 
-Android task framework. Less code, better quality. 
+Android task framework. **Less code, better quality.** 
 
 TaskFramework is an event bus designed to decouple different parts of your application
 while still allowing them to communicate efficiently.
@@ -12,10 +12,10 @@ General Usage and API
 
 Using TaskFramework takes four simple steps:<br/>
 
-1. Use <code>Task.Builder</code> to create a task holder;<br/>
-2. Implement <code>Request.class</code>;<br/>
-3. Extend <code>Response.class</code>;<br/>
-4. Implement <code>Executor.class</code>;<br/>
+1. Use [<code>Task.Builder</code>][1] to create a task holder;<br/>
+2. Implement [<code>Request.class</code>][2];<br/>
+3. Extend [<code>Response.class</code>][3];<br/>
+4. Implement [<code>Executor.class</code>][4];<br/>
 5. Create a task:<br/>
 ```
 String flag = "testAsync";
@@ -29,7 +29,7 @@ Author
 ------
 | [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://worthed.com "Visit worthed.com") |
 |---|
-| [WORTHED.COM](http://worthed.com) |
+| [WORTHED.COM][5] |
 
 
 License
@@ -49,4 +49,8 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
  
-[1]: http://worthed.com
+[1]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Task.java
+[2]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Request.java
+[3]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Response.java
+[4]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Executor.java
+[5]: http://worthed.com
