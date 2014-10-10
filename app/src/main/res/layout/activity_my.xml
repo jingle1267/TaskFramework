@@ -62,14 +62,21 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_log"
+    <ScrollView
+        android:id="@+id/sv_log"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:singleLine="false"
-        android:scrollbars="vertical"
-        android:padding="8dip"
-        android:text="log ..." />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:singleLine="false"
+            android:scrollbars="vertical"
+            android:padding="8dip"
+            android:text="log ..." />
+    </ScrollView>
+
 
 </LinearLayout>

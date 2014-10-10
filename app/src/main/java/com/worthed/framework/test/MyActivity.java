@@ -2,11 +2,13 @@ package com.worthed.framework.test;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.worthed.framework.ClientTaskManager;
@@ -26,7 +28,8 @@ public class MyActivity extends Activity implements Consumer {
 
     private StringBuilder log;
     private TextView logTextView;
-    private android.os.Handler handler;
+    private ScrollView scrollView;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MyActivity extends Activity implements Consumer {
         setContentView(R.layout.activity_my);
         Log.w(TAG, "onCreate()");
         TaskServiceManager.start(this);
+        scrollView = (ScrollView) findViewById(R.id.sv_log);
         logTextView = (TextView) findViewById(R.id.tv_log);
         logTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
         log = new StringBuilder();
@@ -132,6 +136,7 @@ public class MyActivity extends Activity implements Consumer {
             @Override
             public void run() {
                 logTextView.setText(log.toString());
+                scrollView.scrollTo(0, logTextView.getHeight());
             }
         });
     }
