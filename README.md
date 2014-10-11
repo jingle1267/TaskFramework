@@ -11,9 +11,9 @@ General Usage and API
 Using TaskFramework takes four simple steps:<br/>
 
 1. Use [<code>Task.Builder</code>][1] to create a task holder;<br/>
-2. Implement [<code>Request.class</code>][2];<br/>
-3. Extend [<code>Response.class</code>][3];<br/>
-4. Implement [<code>Executor.class</code>][4];<br/>
+2. Implement [<code>Request.java</code>][2];<br/>
+3. Extend [<code>Response.java</code>][3];<br/>
+4. Implement [<code>Executor.java</code>][4];<br/>
 5. Create a task:<br/>
 ```java
 String flag = "testAsync";
