@@ -45,9 +45,9 @@ Alternative libraries
 
 Author
 ------
-| [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://worthed.com "Visit worthed.com") |
+| [![HEAD](https://avatars2.githubusercontent.com/u/3887795?v=2&s=120)](http://ihongqiqu.com "Visit ihongqiqu.com") |
 |---|
-| [WORTHED.COM][5] |
+| [IHONGQIQU.COM][5] |
 
 License
 -------
@@ -70,7 +70,7 @@ License
 [2]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Request.java
 [3]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Response.java
 [4]: https://github.com/jingle1267/TaskFramework/blob/master/framework/src/main/java/com/worthed/framework/Executor.java
-[5]: http://worthed.com
+[5]: http://ihongqiqu.com
 [6]: https://github.com/jingle1267/TaskFramework/pulls
 [7]: https://github.com/jingle1267/TaskFramework/issues
 [8]: https://github.com/greenrobot/EventBus
